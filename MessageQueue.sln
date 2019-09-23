@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostApp.Generic", "HostApp.Generic\HostApp.Generic.csproj", "{8A9E5262-6CBE-4DFB-A329-25A878320770}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Generic", "MessageQueue.Generic\MessageQueue.Generic.csproj", "{8A9E5262-6CBE-4DFB-A329-25A878320770}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostApp.WindowsService", "HostApp.WindowsService\HostApp.WindowsService.csproj", "{AC408378-EB82-4CE9-BD8D-D8ED9053DB1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.WindowsService", "MessageQueue.WindowsService\MessageQueue.WindowsService.csproj", "{AC408378-EB82-4CE9-BD8D-D8ED9053DB1E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostApp.Data", "HostApp.Data\HostApp.Data.csproj", "{A2F59A35-5A53-4404-8859-20A7AC2D206D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Data", "MessageQueue.Data\MessageQueue.Data.csproj", "{A2F59A35-5A53-4404-8859-20A7AC2D206D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostApp.Domain", "HostApp.Domain\HostApp.Domain.csproj", "{E3842EC3-6FCE-4E75-BFA4-43614C139E9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Domain", "MessageQueue.Domain\MessageQueue.Domain.csproj", "{E3842EC3-6FCE-4E75-BFA4-43614C139E9E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostApp.IoC", "HostApp.IoC\HostApp.IoC.csproj", "{0E1A3941-8EC9-42AA-92E2-AB359F5E6375}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.IoC", "MessageQueue.IoC\MessageQueue.IoC.csproj", "{0E1A3941-8EC9-42AA-92E2-AB359F5E6375}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
