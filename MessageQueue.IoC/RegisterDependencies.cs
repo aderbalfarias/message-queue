@@ -1,15 +1,15 @@
-﻿using HostApp.Data.Config;
-using HostApp.Data.Repositories;
-using HostApp.Domain.Entities;
-using HostApp.Domain.Interfaces.Repositories;
-using HostApp.Domain.Interfaces.Services;
-using HostApp.Domain.Services;
+﻿using MessageQueue.Data.Config;
+using MessageQueue.Data.Repositories;
+using MessageQueue.Domain.Entities;
+using MessageQueue.Domain.Interfaces.Repositories;
+using MessageQueue.Domain.Interfaces.Services;
+using MessageQueue.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace HostApp.IoC
+namespace MessageQueue.IoC
 {
     public static class RegisterDependencies
     {

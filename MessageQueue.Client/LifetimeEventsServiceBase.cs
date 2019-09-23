@@ -1,4 +1,4 @@
-﻿using HostApp.Domain.Interfaces.Services;
+﻿using MessageQueue.Domain.Interfaces.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,7 +6,7 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HostApp.WindowsService
+namespace MessageQueue.Client
 {
     internal class LifetimeEventsServiceBase : ServiceBase, IHostLifetime
     {

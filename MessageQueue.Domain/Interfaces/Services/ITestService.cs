@@ -1,8 +1,8 @@
-﻿using HostApp.Domain.Entities;
+﻿using MessageQueue.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HostApp.Domain.Interfaces.Services
+namespace MessageQueue.Domain.Interfaces.Services
 {
     public interface ITestService
     {

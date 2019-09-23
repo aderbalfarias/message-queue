@@ -1,12 +1,12 @@
-﻿using HostApp.Domain.Entities;
-using HostApp.Domain.Interfaces.Repositories;
-using HostApp.Domain.Interfaces.Services;
+﻿using MessageQueue.Domain.Entities;
+using MessageQueue.Domain.Interfaces.Repositories;
+using MessageQueue.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HostApp.Domain.Services
+namespace MessageQueue.Domain.Services
 {
     public class TestService : ITestService
     {

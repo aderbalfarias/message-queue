@@ -1,8 +1,8 @@
-﻿using HostApp.Domain.Entities;
+﻿using MessageQueue.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HostApp.Data.Mappings
+namespace MessageQueue.Data.Mappings
 {
     public class TestMap : IEntityTypeConfiguration<TestEntity>
     {

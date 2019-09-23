@@ -1,5 +1,5 @@
-﻿using HostApp.Data.Config;
-using HostApp.Domain.Interfaces.Repositories;
+﻿using MessageQueue.Data.Config;
+using MessageQueue.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace HostApp.Data.Repositories
+namespace MessageQueue.Data.Repositories
 {
     public class BaseRepository : IBaseRepository
     {
