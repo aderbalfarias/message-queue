@@ -1,8 +1,8 @@
-﻿using HostApp.Data.Mappings;
-using HostApp.Domain.Entities;
+﻿using MessageQueue.Data.Mappings;
+using MessageQueue.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace HostApp.Data.Config
+namespace MessageQueue.Data.Config
 {
     public class PrimaryContext : DbContext
     {

@@ -1,4 +1,4 @@
-﻿using HostApp.IoC;
+﻿using MessageQueue.IoC;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HostApp.WindowsService
+namespace MessageQueue.Client
 {
     internal class Program
     {

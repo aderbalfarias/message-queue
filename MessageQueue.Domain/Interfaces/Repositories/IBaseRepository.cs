@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace HostApp.Domain.Interfaces.Repositories
+namespace MessageQueue.Domain.Interfaces.Repositories
 {
     public interface IBaseRepository
     {

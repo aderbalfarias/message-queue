@@ -1,4 +1,4 @@
-﻿namespace HostApp.Domain.Entities
+﻿namespace MessageQueue.Domain.Entities
 {
     public class AppSettings
     {
