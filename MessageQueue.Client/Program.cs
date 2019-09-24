@@ -15,6 +15,11 @@ namespace MessageQueue.Client
 {
     internal class Program
     {
+        private const string configFiles = "appsettings";
+        private const string extension = "json";
+        private const string appSettings = "AppSettings";
+        private const string nServiceBusSettings = "NServiceBusSettings";
+
         private static async Task Main(string[] args)
         {
             var isService = !(Debugger.IsAttached || args.Contains("--console"));
@@ -23,16 +28,16 @@ namespace MessageQueue.Client
                 .ConfigureHostConfiguration(configHost =>
                 {
                     configHost.SetBasePath(Directory.GetCurrentDirectory());
-                    configHost.AddJsonFile("hostsettings.json", optional: true);
+                    configHost.AddJsonFile($"hostsettings.{extension}", optional: true);
                 })
                 .ConfigureAppConfiguration((hostContext, configApp) =>
                 {
-                    configApp.AddJsonFile("appsettings.json", optional: true);
-                    configApp.AddJsonFile($"appsettings.{hostContext.HostingEnvironment.EnvironmentName}.json", optional: true);
+                    configApp.AddJsonFile($"{configFiles}.{extension}", optional: true);
+                    configApp.AddJsonFile($"{configFiles}.{hostContext.HostingEnvironment.EnvironmentName}.{extension}", optional: true);
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.Classes(hostContext.Configuration.GetSection("AppSettings"));
+                    services.Classes(hostContext.Configuration.GetSection(appSettings));
                     services.Databases(hostContext.Configuration.GetConnectionString("PrimaryConnection"));
                     services.Services();
                     services.Repositories();
