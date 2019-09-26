@@ -13,15 +13,18 @@ namespace MessageQueue.Client
         private readonly ILogger _logger;
         private readonly IApplicationLifetime _appLifetime;
         private readonly ITestService _testSercice;
+        private readonly IEndpointInstance _endpointInstance;
 
         public LifetimeEventsServiceBase(
             ILogger<LifetimeEventsServiceBase> logger,
             IApplicationLifetime appLifetime,
-            ITestService testService)
+            ITestService testService,
+            IEndpointInstance endpointInstance)
         {
             _logger = logger;
             _appLifetime = appLifetime;
             _testSercice = testService;
+            _endpointInstance = endpointInstance;
         }
 
         public Task WaitForStartAsync(CancellationToken cancellationToken)
@@ -73,6 +76,8 @@ namespace MessageQueue.Client
         protected override void OnStop()
         {
             _logger.LogInformation("Windows service stopped");
+
+            _endpointInstance?.Stop().ConfigureAwait(false);
 
             _appLifetime.StopApplication();
 
