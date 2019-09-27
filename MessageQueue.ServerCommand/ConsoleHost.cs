@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MessageQueue.ClientCommand
+namespace MessageQueue.ServerCommand
 {
     public class ConsoleHost : IHostedService
     {
@@ -15,7 +15,7 @@ namespace MessageQueue.ClientCommand
         private readonly IEndpointInstance _endpointInstance;
 
         public ConsoleHost(
-            ILogger<ConsoleHost> logger, 
+            ILogger<ConsoleHost> logger,
             ICommandService commandService,
             IEndpointInstance endpointInstance)
         {

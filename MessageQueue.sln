@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.IoC", "Message
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.NserviceBus", "MessageQueue.NserviceBus\MessageQueue.NserviceBus.csproj", "{CC260DDF-295F-43C6-8758-8583E3135D23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.ServerCommand", "MessageQueue.ServerCommand\MessageQueue.ServerCommand.csproj", "{50FF610F-C074-4F3D-8C7A-9C1E9C2AEA54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{CC260DDF-295F-43C6-8758-8583E3135D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC260DDF-295F-43C6-8758-8583E3135D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC260DDF-295F-43C6-8758-8583E3135D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50FF610F-C074-4F3D-8C7A-9C1E9C2AEA54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50FF610F-C074-4F3D-8C7A-9C1E9C2AEA54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50FF610F-C074-4F3D-8C7A-9C1E9C2AEA54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50FF610F-C074-4F3D-8C7A-9C1E9C2AEA54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
