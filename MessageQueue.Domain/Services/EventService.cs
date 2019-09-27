@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace MessageQueue.Domain.Services
 {
-    public class CommandService : ICommandService
+    public class EventService : IEventService
     {
         private readonly IBaseRepository _baseRepository;
         private readonly ILogger<CommandService> _logger;
         private readonly IMessageSession _messageSession;
         
-        public CommandService(IBaseRepository baseRepository, 
+        public EventService(IBaseRepository baseRepository, 
             ILogger<CommandService> logger,
             IMessageSession messageSession)
         {
@@ -23,23 +23,23 @@ namespace MessageQueue.Domain.Services
             _messageSession = messageSession;
         }
 
-        public async Task SendMessageAsync()
+        public async Task PublishMessageAsync()
         {
             try
             {
-                var message = new MessageCommandEntity
+                var message = new MessageEventEntity
                 {
                     Id = 1,
-                    Description = "Test command message"
+                    Description = "Test Event message"
                 };
 
-                await _messageSession.Send(message).ConfigureAwait(false);
+                await _messageSession.Publish(message).ConfigureAwait(false);
 
-                _logger.LogInformation($"Message id {message.Id} sent successfully");
+                _logger.LogInformation($"Message id {message.Id} published successfully");
             }
             catch (Exception e)
             {
-                _logger.LogError($"Error trying to send message: {e}");
+                _logger.LogError($"Error trying to publish message: {e}");
             }
         }
     }
