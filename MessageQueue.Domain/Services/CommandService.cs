@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace MessageQueue.Domain.Services
 {
-    public class MessageService : IMessageService
+    public class CommandService : ICommandService
     {
         private readonly IBaseRepository _baseRepository;
-        private readonly ILogger<MessageService> _logger;
+        private readonly ILogger<CommandService> _logger;
         private readonly IMessageSession _messageSession;
         
-        public MessageService(IBaseRepository baseRepository, 
-            ILogger<MessageService> logger,
+        public CommandService(IBaseRepository baseRepository, 
+            ILogger<CommandService> logger,
             IMessageSession messageSession)
         {
             _baseRepository = baseRepository;
@@ -27,7 +27,7 @@ namespace MessageQueue.Domain.Services
         {
             try
             {
-                var message = new MessageEntity
+                var message = new MessageCommandEntity
                 {
                     Id = 1,
                     Description = "Test message"

@@ -10,12 +10,12 @@ namespace MessageQueue.ClientCommand
     public class ConsoleHost : IHostedService
     {
         private readonly ILogger _logger;
-        private readonly IMessageService _messageService;
+        private readonly ICommandService _commandService;
 
-        public ConsoleHost(ILogger<ConsoleHost> logger, IMessageService messageService)
+        public ConsoleHost(ILogger<ConsoleHost> logger, ICommandService commandService)
         {
             _logger = logger;
-            _messageService = messageService;
+            _commandService = commandService;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -24,7 +24,7 @@ namespace MessageQueue.ClientCommand
 
             try
             {
-                _messageService.SendMessageAsync();
+                _commandService.SendMessageAsync();
             }
             catch (Exception e)
             {

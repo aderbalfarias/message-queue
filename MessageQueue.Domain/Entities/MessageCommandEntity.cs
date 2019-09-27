@@ -2,7 +2,7 @@
 
 namespace MessageQueue.Domain.Entities
 {
-    public class MessageEntity : ICommand
+    public class MessageCommandEntity : ICommand
     {
         public int Id { get; set; }
 

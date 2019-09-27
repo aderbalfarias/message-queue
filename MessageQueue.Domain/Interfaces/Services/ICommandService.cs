@@ -2,7 +2,7 @@
 
 namespace MessageQueue.Domain.Interfaces.Services
 {
-    public interface IMessageService
+    public interface ICommandService
     {
         Task SendMessageAsync();
     }

@@ -13,18 +13,18 @@ namespace MessageQueue.ClientCommand
     {
         private readonly ILogger _logger;
         private readonly IApplicationLifetime _appLifetime;
-        private readonly IMessageService _messageService;
+        private readonly ICommandService _commandService;
         private readonly IEndpointInstance _endpointInstance;
 
         public LifetimeEventsServiceBase(
             ILogger<LifetimeEventsServiceBase> logger,
             IApplicationLifetime appLifetime,
-            IMessageService messageService,
+            ICommandService commandService,
             IEndpointInstance endpointInstance)
         {
             _logger = logger;
             _appLifetime = appLifetime;
-            _messageService = messageService;
+            _commandService = commandService;
             _endpointInstance = endpointInstance;
         }
 
@@ -65,7 +65,7 @@ namespace MessageQueue.ClientCommand
             _logger.LogInformation("Windows service started");
 
             // Perform post-startup activities here
-            _messageService.SendMessageAsync();
+            _commandService.SendMessageAsync();
 
             base.OnStart(args);
         }
