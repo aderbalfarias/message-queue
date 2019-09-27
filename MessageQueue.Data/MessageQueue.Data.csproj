@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HostApp.Domain\HostApp.Domain.csproj" />
+    <ProjectReference Include="..\MessageQueue.Domain\MessageQueue.Domain.csproj" />
   </ItemGroup>
 
 </Project>

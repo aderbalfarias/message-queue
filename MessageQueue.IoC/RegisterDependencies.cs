@@ -22,7 +22,7 @@ namespace MessageQueue.IoC
 
         public static IServiceCollection Services(this IServiceCollection services)
         {
-            services.AddScoped<ITestService, TestService>();
+            services.AddScoped<ICommandService, CommandService>();
 
             return services;
         }

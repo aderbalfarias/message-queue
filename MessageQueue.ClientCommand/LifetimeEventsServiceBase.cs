@@ -1,27 +1,31 @@
 ﻿using MessageQueue.Domain.Interfaces.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NServiceBus;
 using System;
 using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MessageQueue.Client
+namespace MessageQueue.ClientCommand
 {
     internal class LifetimeEventsServiceBase : ServiceBase, IHostLifetime
     {
         private readonly ILogger _logger;
         private readonly IApplicationLifetime _appLifetime;
-        private readonly ITestService _testSercice;
+        private readonly ICommandService _commandService;
+        private readonly IEndpointInstance _endpointInstance;
 
         public LifetimeEventsServiceBase(
             ILogger<LifetimeEventsServiceBase> logger,
             IApplicationLifetime appLifetime,
-            ITestService testService)
+            ICommandService commandService,
+            IEndpointInstance endpointInstance)
         {
             _logger = logger;
             _appLifetime = appLifetime;
-            _testSercice = testService;
+            _commandService = commandService;
+            _endpointInstance = endpointInstance;
         }
 
         public Task WaitForStartAsync(CancellationToken cancellationToken)
@@ -61,7 +65,7 @@ namespace MessageQueue.Client
             _logger.LogInformation("Windows service started");
 
             // Perform post-startup activities here
-            _testSercice.GetAll();
+            _commandService.SendMessageAsync();
 
             base.OnStart(args);
         }
@@ -73,6 +77,8 @@ namespace MessageQueue.Client
         protected override void OnStop()
         {
             _logger.LogInformation("Windows service stopped");
+
+            _endpointInstance?.Stop().ConfigureAwait(false);
 
             _appLifetime.StopApplication();
 
