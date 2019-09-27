@@ -12,4 +12,4 @@ $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($acl
 $acl.SetAccessRule($accessRule)
 $acl | Set-Acl $exePath
 
-New-Service -Name HostAsWindowsService -BinaryPathName $exePath\MyProject.exe -Credential $domainAndUser -Description "Hosting App .NET Core as a windows service" -DisplayName "Host App Test on Windows" -StartupType Automatic
+New-Service -Name MessageQueue_ClientCommand -BinaryPathName $exePath\MyProject.exe -Credential $domainAndUser -Description "Hosting App .NET Core as a windows service" -DisplayName "Host Service MessageQueue_ClientCommand" -StartupType Automatic
