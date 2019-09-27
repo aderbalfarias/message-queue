@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Client", "MessageQueue.Client\MessageQueue.Client.csproj", "{AC408378-EB82-4CE9-BD8D-D8ED9053DB1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.ClientCommand", "MessageQueue.Client\MessageQueue.ClientCommand.csproj", "{AC408378-EB82-4CE9-BD8D-D8ED9053DB1E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Data", "MessageQueue.Data\MessageQueue.Data.csproj", "{A2F59A35-5A53-4404-8859-20A7AC2D206D}"
 EndProject

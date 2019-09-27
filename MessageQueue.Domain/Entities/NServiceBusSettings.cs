@@ -2,7 +2,13 @@ namespace MessageQueue.Domain.Entities
 {
     public class NServiceBusSettings
     {
-        public string CrsHandlerEndpoint { get; set; }
+        public string ProjectEndpoint { get; set; }
+
+        public string SubscribeToEndpoint { get; set; }
+
+        public string RouteToEndpoint { get; set; }
+
+        public string PathToLog { get; set; }
 
         public int NumberOfRetries { get; set; }
 

@@ -5,17 +5,17 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MessageQueue.Client
+namespace MessageQueue.ClientCommand
 {
     public class ConsoleHost : IHostedService
     {
         private readonly ILogger _logger;
-        private readonly ITestService _testService;
+        private readonly IMessageService _messageService;
 
-        public ConsoleHost(ILogger<ConsoleHost> logger, ITestService testService)
+        public ConsoleHost(ILogger<ConsoleHost> logger, IMessageService messageService)
         {
             _logger = logger;
-            _testService = testService;
+            _messageService = messageService;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -24,7 +24,7 @@ namespace MessageQueue.Client
 
             try
             {
-                _testService.GetAll();
+                _messageService.SendMessage();
             }
             catch (Exception e)
             {

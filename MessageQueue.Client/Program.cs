@@ -1,17 +1,21 @@
-﻿using MessageQueue.IoC;
+﻿using MessageQueue.Domain.Entities;
+using MessageQueue.IoC;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NServiceBus;
+using NServiceBus.Logging;
+using NServiceBus.Persistence.Sql;
 using Serilog;
 using System;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
-namespace MessageQueue.Client
+namespace MessageQueue.ClientCommand
 {
     internal class Program
     {
@@ -19,6 +23,7 @@ namespace MessageQueue.Client
         private const string extension = "json";
         private const string appSettings = "AppSettings";
         private const string nServiceBusSettings = "NServiceBusSettings";
+        private const string connectionName = "PrimaryConnection";
 
         private static async Task Main(string[] args)
         {
@@ -38,9 +43,10 @@ namespace MessageQueue.Client
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.Classes(hostContext.Configuration.GetSection(appSettings));
-                    services.Databases(hostContext.Configuration.GetConnectionString("PrimaryConnection"));
+                    services.Databases(hostContext.Configuration.GetConnectionString(connectionName));
                     services.Services();
                     services.Repositories();
+
                     NServiceBusConfig(hostContext, services);
                 })
                 .ConfigureLogging((hostContext, configLogging) =>
@@ -71,10 +77,10 @@ namespace MessageQueue.Client
         {
             var serviceBusSettings = hostContext.Configuration.GetSection(nServiceBusSettings).Get<NServiceBusSettings>();
 
-            var endpointConfiguration = new EndpointConfiguration(serviceBusSettings.CrsHandlerEndpoint);
+            var endpointConfiguration = new EndpointConfiguration(serviceBusSettings.ProjectEndpoint);
 
             var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
-            transport.ConnectionString(hostContext.Configuration.GetConnectionString(discConnection));
+            transport.ConnectionString(hostContext.Configuration.GetConnectionString(connectionName));
             transport.Transactions(TransportTransactionMode.SendsAtomicWithReceive);
 
             endpointConfiguration.AutoSubscribe();
@@ -85,18 +91,18 @@ namespace MessageQueue.Client
             endpointConfiguration.AuditProcessedMessagesTo(serviceBusSettings.AuditProcessedMessagesTo);
             endpointConfiguration.SendFailedMessagesTo(serviceBusSettings.SendFailedMessagesTo);
 
-            var recoverability = endpointConfiguration.Recoverability();
-            recoverability.Immediate(
-                immediate =>
-                {
-                    immediate.NumberOfRetries(serviceBusSettings.NumberOfRetries);
-                });
-            recoverability.Delayed(
-                delayed =>
-                {
-                    delayed.NumberOfRetries(serviceBusSettings.NumberOfRetries);
-                    delayed.TimeIncrease(TimeSpan.FromSeconds(serviceBusSettings.RecoverabilityTimeIncreaseInSeconds));
-                });
+            //var recoverability = endpointConfiguration.Recoverability();
+            //recoverability.Immediate(
+            //    immediate =>
+            //    {
+            //        immediate.NumberOfRetries(serviceBusSettings.NumberOfRetries);
+            //    });
+            //recoverability.Delayed(
+            //    delayed =>
+            //    {
+            //        delayed.NumberOfRetries(serviceBusSettings.NumberOfRetries);
+            //        delayed.TimeIncrease(TimeSpan.FromSeconds(serviceBusSettings.RecoverabilityTimeIncreaseInSeconds));
+            //    });
 
             //var metrics = endpointConfiguration.EnableMetrics();
             //metrics.SendMetricDataToServiceControl(nServiceBusSettings.SendMetricDataToServiceControl,
@@ -107,16 +113,26 @@ namespace MessageQueue.Client
             persistence.ConnectionBuilder(
                 connectionBuilder: () =>
                 {
-                    return new SqlConnection(hostContext.Configuration.GetConnectionString(discConnection));
+                    return new SqlConnection(hostContext.Configuration.GetConnectionString(connectionName));
                 });
 
             var subscriptions = persistence.SubscriptionSettings();
             subscriptions.CacheFor(TimeSpan.FromMinutes(serviceBusSettings.SubscriptionCacheForInMinutes));
 
+            var defaultFactory = LogManager.Use<DefaultFactory>();
+            defaultFactory.Directory(serviceBusSettings.PathToLog);
+
+            endpointConfiguration.RegisterComponents(
+                registration: configureComponents =>
+                {
+                    configureComponents.RegisterSingleton(hostContext.Configuration.GetSection(appSettings).Get<AppSettings>());
+                });
+
             var endpointInstance = Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();
 
             services.AddSingleton(endpointInstance);
             services.AddSingleton<IMessageSession>(endpointInstance);
+
 
             return Task.CompletedTask;
         }
