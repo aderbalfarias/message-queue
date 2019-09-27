@@ -1,7 +1,9 @@
-﻿using MessageQueue.Domain.Interfaces.Repositories;
+﻿using MessageQueue.Domain.Entities;
+using MessageQueue.Domain.Interfaces.Repositories;
 using MessageQueue.Domain.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 using NServiceBus;
+using System;
 using System.Threading.Tasks;
 
 namespace MessageQueue.Domain.Services
@@ -21,11 +23,24 @@ namespace MessageQueue.Domain.Services
             _messageSession = messageSession;
         }
 
-        public Task SendMessage()
+        public async Task SendMessageAsync()
         {
+            try
+            {
+                var message = new MessageEntity
+                {
+                    Id = 1,
+                    Description = "Test message"
+                };
 
+                await _messageSession.Send(message).ConfigureAwait(false);
 
-            return Task.CompletedTask;
+                _logger.LogInformation($"Message id {message.Id} sent successfully");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error trying to send message: {e}");
+            }
         }
     }
 }

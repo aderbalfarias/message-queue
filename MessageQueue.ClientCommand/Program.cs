@@ -83,6 +83,9 @@ namespace MessageQueue.ClientCommand
             transport.ConnectionString(hostContext.Configuration.GetConnectionString(connectionName));
             transport.Transactions(TransportTransactionMode.SendsAtomicWithReceive);
 
+            var routing = transport.Routing();
+            routing.RouteToEndpoint(typeof(MessageEntity), serviceBusSettings.RouteToEndpoint);
+
             endpointConfiguration.AutoSubscribe();
             endpointConfiguration.EnableInstallers();
             endpointConfiguration.UsePersistence<SqlPersistence>();

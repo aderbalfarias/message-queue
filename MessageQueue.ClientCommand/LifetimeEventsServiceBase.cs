@@ -65,7 +65,7 @@ namespace MessageQueue.ClientCommand
             _logger.LogInformation("Windows service started");
 
             // Perform post-startup activities here
-            _messageService.SendMessage();
+            _messageService.SendMessageAsync();
 
             base.OnStart(args);
         }

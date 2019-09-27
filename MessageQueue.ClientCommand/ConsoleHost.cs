@@ -24,7 +24,7 @@ namespace MessageQueue.ClientCommand
 
             try
             {
-                _messageService.SendMessage();
+                _messageService.SendMessageAsync();
             }
             catch (Exception e)
             {
