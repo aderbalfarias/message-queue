@@ -14,8 +14,7 @@ namespace MessageQueue.ServerCommand
             nsbLog.Info($"Message {message.Id} received");
             
             // Implement logic and log
-
-
+            
 
             return Task.CompletedTask;
         }
