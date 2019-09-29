@@ -1,5 +1,4 @@
-﻿using MessageQueue.Domain.Entities;
-using MessageQueue.IoC;
+﻿using MessageQueue.IoC;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
