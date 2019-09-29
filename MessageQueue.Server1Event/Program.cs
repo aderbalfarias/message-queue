@@ -44,7 +44,8 @@ namespace MessageQueue.Server1Event
                     services.Repositories();
 
                     NserviceBus.Configuration
-                        .Register(hostContext, services, connectionName, nServiceBusSection, appSection);
+                        .Register(hostContext, services, connectionName, nServiceBusSection,
+                            appSection, messageTypePublisher: typeof(MessageEventEntity));
                 })
                 .ConfigureLogging((hostContext, configLogging) =>
                 {

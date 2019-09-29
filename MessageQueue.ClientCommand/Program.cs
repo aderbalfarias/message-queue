@@ -43,8 +43,9 @@ namespace MessageQueue.ClientCommand
                     services.Services();
                     services.Repositories();
 
-                    NserviceBus.Configuration.Register(hostContext, services,
-                        connectionName, nServiceBusSection, appSection, true, typeof(MessageCommandEntity));
+                    NserviceBus.Configuration
+                        .Register(hostContext, services, connectionName, nServiceBusSection, 
+                            appSection, true, messageTypeRoute: typeof(MessageCommandEntity));
                 })
                 .ConfigureLogging((hostContext, configLogging) =>
                 {
