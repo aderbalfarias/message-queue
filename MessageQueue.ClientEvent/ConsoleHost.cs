@@ -1,3 +1,4 @@
+using MessageQueue.Domain.Interfaces.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NServiceBus;
@@ -5,21 +6,21 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MessageQueue.ServerCommand
+namespace MessageQueue.ClientEvent
 {
     public class ConsoleHost : IHostedService
     {
         private readonly ILogger _logger;
-        private readonly EndpointConfiguration _endpointConfiguration;
-        private IEndpointInstance _endpointInstance;
+        private readonly IEventService _eventService;
+        private readonly IEndpointInstance _endpointInstance;
 
         public ConsoleHost(
-            ILogger<ConsoleHost> logger,
-            EndpointConfiguration endpointConfiguration,
+            ILogger<ConsoleHost> logger, 
+            IEventService eventService,
             IEndpointInstance endpointInstance)
         {
             _logger = logger;
-            _endpointConfiguration = endpointConfiguration;
+            _eventService = eventService;
             _endpointInstance = endpointInstance;
         }
 
@@ -29,10 +30,7 @@ namespace MessageQueue.ServerCommand
 
             try
             {
-                _endpointInstance = Endpoint
-                    .Start(_endpointConfiguration)
-                    .GetAwaiter()
-                    .GetResult();
+                _eventService.PublishMessageAsync();
             }
             catch (Exception e)
             {

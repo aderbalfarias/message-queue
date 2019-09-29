@@ -1,5 +1,4 @@
-﻿using MessageQueue.Domain.Interfaces.Services;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NServiceBus;
 using System;
@@ -7,7 +6,7 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MessageQueue.ServerCommand
+namespace MessageQueue.Server1Event
 {
     internal class LifetimeEventsServiceBase : ServiceBase, IHostLifetime
     {
@@ -64,7 +63,6 @@ namespace MessageQueue.ServerCommand
         {
             _logger.LogInformation("Windows service started");
 
-            // Perform post-startup activities here
             _endpointInstance = Endpoint
                 .Start(_endpointConfiguration)
                 .GetAwaiter()

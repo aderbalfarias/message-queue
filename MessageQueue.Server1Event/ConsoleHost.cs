@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MessageQueue.ServerCommand
+namespace MessageQueue.Server1Event
 {
     public class ConsoleHost : IHostedService
     {

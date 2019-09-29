@@ -7,24 +7,24 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MessageQueue.ServerCommand
+namespace MessageQueue.ClientEvent
 {
     internal class LifetimeEventsServiceBase : ServiceBase, IHostLifetime
     {
         private readonly ILogger _logger;
         private readonly IApplicationLifetime _appLifetime;
-        private readonly EndpointConfiguration _endpointConfiguration;
-        private IEndpointInstance _endpointInstance;
+        private readonly IEventService _eventService;
+        private readonly IEndpointInstance _endpointInstance;
 
         public LifetimeEventsServiceBase(
             ILogger<LifetimeEventsServiceBase> logger,
             IApplicationLifetime appLifetime,
-            EndpointConfiguration endpointConfiguration,
+            IEventService eventService,
             IEndpointInstance endpointInstance)
         {
             _logger = logger;
             _appLifetime = appLifetime;
-            _endpointConfiguration = endpointConfiguration;
+            _eventService = eventService;
             _endpointInstance = endpointInstance;
         }
 
@@ -65,10 +65,7 @@ namespace MessageQueue.ServerCommand
             _logger.LogInformation("Windows service started");
 
             // Perform post-startup activities here
-            _endpointInstance = Endpoint
-                .Start(_endpointConfiguration)
-                .GetAwaiter()
-                .GetResult();
+            _eventService.PublishMessageAsync();
 
             base.OnStart(args);
         }

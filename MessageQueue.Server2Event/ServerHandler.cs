@@ -3,13 +3,13 @@ using NServiceBus;
 using NServiceBus.Logging;
 using System.Threading.Tasks;
 
-namespace MessageQueue.ServerCommand
+namespace MessageQueue.Server2Event
 {
-    public class ServerHandler : IHandleMessages<MessageCommandEntity>
+    public class ServerHandler : IHandleMessages<MessageEventEntity>
     {
         private readonly ILog nsbLog = LogManager.GetLogger<ServerHandler>();
 
-        public Task Handle(MessageCommandEntity message, IMessageHandlerContext context)
+        public Task Handle(MessageEventEntity message, IMessageHandlerContext context)
         {
             nsbLog.Info($"Message {message.Id} received");
             

@@ -1,5 +1,4 @@
-﻿using MessageQueue.Domain.Entities;
-using MessageQueue.IoC;
+﻿using MessageQueue.IoC;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MessageQueue.ClientCommand
+namespace MessageQueue.ClientEvent
 {
     internal class Program
     {
@@ -44,8 +43,7 @@ namespace MessageQueue.ClientCommand
                     services.Repositories();
 
                     NserviceBus.Configuration
-                        .Register(hostContext, services, connectionName, nServiceBusSection, 
-                            appSection, true, messageTypeRoute: typeof(MessageCommandEntity));
+                        .Register(hostContext, services, connectionName, nServiceBusSection, appSection, true);
                 })
                 .ConfigureLogging((hostContext, configLogging) =>
                 {

@@ -7,7 +7,6 @@ using MessageQueue.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace MessageQueue.IoC
 {
@@ -23,6 +22,7 @@ namespace MessageQueue.IoC
         public static IServiceCollection Services(this IServiceCollection services)
         {
             services.AddScoped<ICommandService, CommandService>();
+            services.AddScoped<IEventService, EventService>();
 
             return services;
         }
