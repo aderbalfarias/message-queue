@@ -41,7 +41,7 @@ namespace MessageQueue.NserviceBus
 
             var endpointConfiguration = new EndpointConfiguration(serviceBusSettings.ProjectEndpoint);
 
-            endpointConfiguration.TansportConfig(connectionName, messageTypeRoute, messageTypePublisher);
+            endpointConfiguration.TansportConfig(serviceBusSettings, connectionName, messageTypeRoute, messageTypePublisher);
 
             endpointConfiguration.AutoSubscribe();
             endpointConfiguration.EnableInstallers();
@@ -51,19 +51,9 @@ namespace MessageQueue.NserviceBus
             endpointConfiguration.AuditProcessedMessagesTo(serviceBusSettings.AuditProcessedMessagesTo);
             endpointConfiguration.SendFailedMessagesTo(serviceBusSettings.SendFailedMessagesTo);
            
-            // endpointConfiguration.RetryConfig();
-            // endpointConfiguration.MetricsConfig();
-            
-            var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
-            persistence.SqlDialect<SqlDialect.MsSqlServer>();
-            persistence.ConnectionBuilder(
-                connectionBuilder: () =>
-                {
-                    return new SqlConnection(hostContext.Configuration.GetConnectionString(connectionName));
-                });
-
-            var subscriptions = persistence.SubscriptionSettings();
-            subscriptions.CacheFor(TimeSpan.FromMinutes(serviceBusSettings.SubscriptionCacheForInMinutes));
+            // endpointConfiguration.RetryConfig(serviceBusSettings);
+            // endpointConfiguration.MetricsConfig(serviceBusSettings);
+            endpointConfiguration.PersistenceConfig(serviceBusSettings, connectionName);
 
             var defaultFactory = LogManager.Use<DefaultFactory>();
             defaultFactory.Directory(serviceBusSettings.PathToLog);
@@ -90,7 +80,7 @@ namespace MessageQueue.NserviceBus
         }
 
         private static Task TansportConfig(this EndpointConfiguration endpointConfiguration,  
-            string connectionName, Type messageTypeRoute = null, Type messageTypePublisher = null)
+            NServiceBusSettings serviceBusSettings, string connectionName, Type messageTypeRoute = null, Type messageTypePublisher = null)
         {
             var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
 
@@ -106,7 +96,25 @@ namespace MessageQueue.NserviceBus
             return Task.CompletedTask;
         }
 
-        private static Task RetryConfig(this EndpointConfiguration endpointConfiguration)
+        private static Task PersistenceConfig(this EndpointConfiguration endpointConfiguration,  
+            NServiceBusSettings serviceBusSettings, string connectionName)
+        {
+            var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
+
+            persistence.SqlDialect<SqlDialect.MsSqlServer>();
+            persistence.ConnectionBuilder(
+                connectionBuilder: () =>
+                {
+                    return new SqlConnection(hostContext.Configuration.GetConnectionString(connectionName));
+                });
+
+            var subscriptions = persistence.SubscriptionSettings();
+            subscriptions.CacheFor(TimeSpan.FromMinutes(serviceBusSettings.SubscriptionCacheForInMinutes));
+
+            return Task.CompletedTask;
+        }
+
+        private static Task RetryConfig(this EndpointConfiguration endpointConfiguration, NServiceBusSettings serviceBusSettings)
         {
             var recoverability = endpointConfiguration.Recoverability();
 
@@ -126,7 +134,7 @@ namespace MessageQueue.NserviceBus
             return Task.CompletedTask;
         }
 
-        private static Task MetricsConfig(this EndpointConfiguration endpointConfiguration)
+        private static Task MetricsConfig(this EndpointConfiguration endpointConfiguration, NServiceBusSettings serviceBusSettings)
         {
             var metrics = endpointConfiguration.EnableMetrics();
 
