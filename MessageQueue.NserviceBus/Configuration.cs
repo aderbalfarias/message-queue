@@ -58,24 +58,10 @@ namespace MessageQueue.NserviceBus
             endpointConfiguration.SendHeartbeatTo(serviceBusSettings.SendFailedMessagesTo);
             endpointConfiguration.AuditProcessedMessagesTo(serviceBusSettings.AuditProcessedMessagesTo);
             endpointConfiguration.SendFailedMessagesTo(serviceBusSettings.SendFailedMessagesTo);
-
-            //var recoverability = endpointConfiguration.Recoverability();
-            //recoverability.Immediate(
-            //    immediate =>
-            //    {
-            //        immediate.NumberOfRetries(serviceBusSettings.NumberOfRetries);
-            //    });
-            //recoverability.Delayed(
-            //    delayed =>
-            //    {
-            //        delayed.NumberOfRetries(serviceBusSettings.NumberOfRetries);
-            //        delayed.TimeIncrease(TimeSpan.FromSeconds(serviceBusSettings.RecoverabilityTimeIncreaseInSeconds));
-            //    });
-
-            //var metrics = endpointConfiguration.EnableMetrics();
-            //metrics.SendMetricDataToServiceControl(nServiceBusSettings.SendMetricDataToServiceControl,
-            //    TimeSpan.FromMilliseconds(nServiceBusSettings.SendMetricDataToServiceControlIntervalInMilliseconds));
-
+           
+            // endpointConfiguration.RetryConfig();
+            // endpointConfiguration.MetricsConfig();
+            
             var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
             persistence.SqlDialect<SqlDialect.MsSqlServer>();
             persistence.ConnectionBuilder(
@@ -109,6 +95,32 @@ namespace MessageQueue.NserviceBus
             }           
 
             return Task.CompletedTask;
+        }
+
+        private static void RetryConfig(this EndpointConfiguration endpointConfiguration)
+        {
+            var recoverability = endpointConfiguration.Recoverability();
+
+            recoverability.Immediate(
+               immediate =>
+               {
+                   immediate.NumberOfRetries(serviceBusSettings.NumberOfRetries);
+               });
+
+            recoverability.Delayed(
+               delayed =>
+               {
+                   delayed.NumberOfRetries(serviceBusSettings.NumberOfRetries);
+                   delayed.TimeIncrease(TimeSpan.FromSeconds(serviceBusSettings.RecoverabilityTimeIncreaseInSeconds));
+               });
+        }
+
+        private static void MetricsConfig(this EndpointConfiguration endpointConfiguration)
+        {
+            var metrics = endpointConfiguration.EnableMetrics();
+
+            metrics.SendMetricDataToServiceControl(nServiceBusSettings.SendMetricDataToServiceControl,
+               TimeSpan.FromMilliseconds(nServiceBusSettings.SendMetricDataToServiceControlIntervalInMilliseconds));
         }
     }
 }
