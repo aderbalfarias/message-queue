@@ -41,15 +41,7 @@ namespace MessageQueue.NserviceBus
 
             var endpointConfiguration = new EndpointConfiguration(serviceBusSettings.ProjectEndpoint);
 
-            var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
-            transport.ConnectionString(hostContext.Configuration.GetConnectionString(connectionName));
-            transport.Transactions(TransportTransactionMode.SendsAtomicWithReceive);
-
-            if (messageTypeRoute != null && !string.IsNullOrEmpty(serviceBusSettings.RouteToEndpoint))
-                transport.Routing().RouteToEndpoint(messageTypeRoute, serviceBusSettings.RouteToEndpoint);
-            
-            if (messageTypePublisher != null && !string.IsNullOrEmpty(serviceBusSettings.SubscribeToEndpoint))
-                transport.Routing().RegisterPublisher(messageTypePublisher, serviceBusSettings.SubscribeToEndpoint);
+            endpointConfiguration.TansportConfig(connectionName, messageTypeRoute, messageTypePublisher);
 
             endpointConfiguration.AutoSubscribe();
             endpointConfiguration.EnableInstallers();
@@ -94,6 +86,23 @@ namespace MessageQueue.NserviceBus
                 services.AddSingleton(endpointConfiguration);
             }           
 
+            return Task.CompletedTask;
+        }
+
+        private static Task TansportConfig(this EndpointConfiguration endpointConfiguration,  
+            string connectionName, Type messageTypeRoute = null, Type messageTypePublisher = null)
+        {
+            var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
+
+            transport.ConnectionString(hostContext.Configuration.GetConnectionString(connectionName));
+            transport.Transactions(TransportTransactionMode.SendsAtomicWithReceive);
+
+            if (messageTypeRoute != null && !string.IsNullOrEmpty(serviceBusSettings.RouteToEndpoint))
+                transport.Routing().RouteToEndpoint(messageTypeRoute, serviceBusSettings.RouteToEndpoint);
+            
+            if (messageTypePublisher != null && !string.IsNullOrEmpty(serviceBusSettings.SubscribeToEndpoint))
+                transport.Routing().RegisterPublisher(messageTypePublisher, serviceBusSettings.SubscribeToEndpoint);
+            
             return Task.CompletedTask;
         }
 
