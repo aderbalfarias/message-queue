@@ -106,7 +106,7 @@ namespace MessageQueue.NserviceBus
             return Task.CompletedTask;
         }
 
-        private static void RetryConfig(this EndpointConfiguration endpointConfiguration)
+        private static Task RetryConfig(this EndpointConfiguration endpointConfiguration)
         {
             var recoverability = endpointConfiguration.Recoverability();
 
@@ -122,14 +122,18 @@ namespace MessageQueue.NserviceBus
                    delayed.NumberOfRetries(serviceBusSettings.NumberOfRetries);
                    delayed.TimeIncrease(TimeSpan.FromSeconds(serviceBusSettings.RecoverabilityTimeIncreaseInSeconds));
                });
+
+            return Task.CompletedTask;
         }
 
-        private static void MetricsConfig(this EndpointConfiguration endpointConfiguration)
+        private static Task MetricsConfig(this EndpointConfiguration endpointConfiguration)
         {
             var metrics = endpointConfiguration.EnableMetrics();
 
             metrics.SendMetricDataToServiceControl(nServiceBusSettings.SendMetricDataToServiceControl,
                TimeSpan.FromMilliseconds(nServiceBusSettings.SendMetricDataToServiceControlIntervalInMilliseconds));
+
+            return Task.CompletedTask;
         }
     }
 }
