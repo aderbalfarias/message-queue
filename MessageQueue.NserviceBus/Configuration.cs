@@ -16,14 +16,14 @@ namespace MessageQueue.NserviceBus
         /// <summary>
         ///     Method to create initial confiration for NServiceBus endpoints
         /// </summary>
-        /// <param name="hostContext"></param>
-        /// <param name="services"></param>
-        /// <param name="connectionName"></param>
-        /// <param name="nServiceBusSection"></param>
-        /// <param name="appSection"></param>
-        /// <param name="endpointStart"></param>
-        /// <param name="messageTypeRoute"></param>
-        /// <param name="messageTypePublisher"></param>
+        /// <param name="hostContext">Host context</param>
+        /// <param name="services">Services injected</param>
+        /// <param name="connectionName">Connection string name</param>
+        /// <param name="nServiceBusSection">NServiceBus settings name</param>
+        /// <param name="appSection">App settings name</param>
+        /// <param name="endpointStart">Endpoint should be started</param>
+        /// <param name="messageTypeRoute">Message type in case of route to an endpoint</param>
+        /// <param name="messageTypePublisher">Message type in case of subscription to an endpoint</param>
         /// <returns></returns>
         public static Task Register(
             HostBuilderContext hostContext, 
