@@ -6,12 +6,7 @@
     <LangVersion>Latest</LangVersion>
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="appsettings.json" />
-    <None Remove="hostsettings.json" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
