@@ -10,21 +10,20 @@ namespace MessageQueue.Server2Event
 {
     internal class LifetimeEventsServiceBase : ServiceBase, IHostLifetime
     {
+        private IEndpointInstance _endpointInstance;
+
         private readonly ILogger _logger;
         private readonly IApplicationLifetime _appLifetime;
         private readonly EndpointConfiguration _endpointConfiguration;
-        private IEndpointInstance _endpointInstance;
 
         public LifetimeEventsServiceBase(
             ILogger<LifetimeEventsServiceBase> logger,
             IApplicationLifetime appLifetime,
-            EndpointConfiguration endpointConfiguration,
-            IEndpointInstance endpointInstance)
+            EndpointConfiguration endpointConfiguration)
         {
             _logger = logger;
             _appLifetime = appLifetime;
             _endpointConfiguration = endpointConfiguration;
-            _endpointInstance = endpointInstance;
         }
 
         public Task WaitForStartAsync(CancellationToken cancellationToken)

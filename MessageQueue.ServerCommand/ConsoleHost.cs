@@ -9,18 +9,17 @@ namespace MessageQueue.ServerCommand
 {
     public class ConsoleHost : IHostedService
     {
+        private IEndpointInstance _endpointInstance;
+
         private readonly ILogger _logger;
         private readonly EndpointConfiguration _endpointConfiguration;
-        private IEndpointInstance _endpointInstance;
 
         public ConsoleHost(
             ILogger<ConsoleHost> logger,
-            EndpointConfiguration endpointConfiguration,
-            IEndpointInstance endpointInstance)
+            EndpointConfiguration endpointConfiguration)
         {
             _logger = logger;
             _endpointConfiguration = endpointConfiguration;
-            _endpointInstance = endpointInstance;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

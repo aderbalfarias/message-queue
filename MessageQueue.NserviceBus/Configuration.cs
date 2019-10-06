@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MessageQueue.NserviceBus
 {
-    public class Configuration
+    public static class Configuration
     {
         /// <summary>
         ///     Method to create initial confiration for NServiceBus endpoints
@@ -41,7 +41,8 @@ namespace MessageQueue.NserviceBus
 
             var endpointConfiguration = new EndpointConfiguration(serviceBusSettings.ProjectEndpoint);
 
-            endpointConfiguration.TansportConfig(serviceBusSettings, connectionName, messageTypeRoute, messageTypePublisher);
+            endpointConfiguration.TransportConfig(hostContext, serviceBusSettings, 
+                connectionName, messageTypeRoute, messageTypePublisher);
 
             endpointConfiguration.AutoSubscribe();
             endpointConfiguration.EnableInstallers();
@@ -53,7 +54,7 @@ namespace MessageQueue.NserviceBus
            
             // endpointConfiguration.RetryConfig(serviceBusSettings);
             // endpointConfiguration.MetricsConfig(serviceBusSettings);
-            endpointConfiguration.PersistenceConfig(serviceBusSettings, connectionName);
+            endpointConfiguration.PersistenceConfig(hostContext, serviceBusSettings, connectionName);
 
             var defaultFactory = LogManager.Use<DefaultFactory>();
             defaultFactory.Directory(serviceBusSettings.PathToLog);
@@ -79,8 +80,9 @@ namespace MessageQueue.NserviceBus
             return Task.CompletedTask;
         }
 
-        private static Task TansportConfig(this EndpointConfiguration endpointConfiguration,  
-            NServiceBusSettings serviceBusSettings, string connectionName, Type messageTypeRoute = null, Type messageTypePublisher = null)
+        private static Task TransportConfig(this EndpointConfiguration endpointConfiguration,
+            HostBuilderContext hostContext, NServiceBusSettings serviceBusSettings, 
+            string connectionName, Type messageTypeRoute = null, Type messageTypePublisher = null)
         {
             var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
 
@@ -96,8 +98,8 @@ namespace MessageQueue.NserviceBus
             return Task.CompletedTask;
         }
 
-        private static Task PersistenceConfig(this EndpointConfiguration endpointConfiguration,  
-            NServiceBusSettings serviceBusSettings, string connectionName)
+        private static Task PersistenceConfig(this EndpointConfiguration endpointConfiguration,
+            HostBuilderContext hostContext, NServiceBusSettings serviceBusSettings, string connectionName)
         {
             var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
 
@@ -138,8 +140,8 @@ namespace MessageQueue.NserviceBus
         {
             var metrics = endpointConfiguration.EnableMetrics();
 
-            metrics.SendMetricDataToServiceControl(nServiceBusSettings.SendMetricDataToServiceControl,
-               TimeSpan.FromMilliseconds(nServiceBusSettings.SendMetricDataToServiceControlIntervalInMilliseconds));
+            metrics.SendMetricDataToServiceControl(serviceBusSettings.SendMetricDataToServiceControl,
+               TimeSpan.FromMilliseconds(serviceBusSettings.SendMetricDataToServiceControlIntervalInMilliseconds));
 
             return Task.CompletedTask;
         }
