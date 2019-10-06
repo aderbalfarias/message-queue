@@ -9,9 +9,10 @@ namespace MessageQueue.Server2Event
 {
     public class ConsoleHost : IHostedService
     {
+        private IEndpointInstance _endpointInstance;
+
         private readonly ILogger _logger;
         private readonly EndpointConfiguration _endpointConfiguration;
-        private IEndpointInstance _endpointInstance;
 
         public ConsoleHost(
             ILogger<ConsoleHost> logger,
