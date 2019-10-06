@@ -11,7 +11,7 @@ namespace MessageQueue.ServerCommand
 
         public Task Handle(MessageCommandEntity message, IMessageHandlerContext context)
         {
-            nsbLog.Info($"Message {message.Id} received");
+            nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler)}");
             
             // Implement logic and log
             
