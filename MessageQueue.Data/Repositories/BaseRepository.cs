@@ -38,6 +38,9 @@ namespace MessageQueue.Data.Repositories
         public async Task<TEntity> GetObjectAsync<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class 
             => await _context.Set<TEntity>().FirstOrDefaultAsync(predicate);
 
+        public async Task<TEntity> GetObjectWithInclude<TEntity>(Expression<Func<TEntity, bool>> predicate, string include) where TEntity : class
+            => await _context.Set<TEntity>().Include(include).FirstOrDefaultAsync(predicate);
+
         public async Task<int> Add<TEntity>(TEntity entity)
         {
             _context.Add(entity);
