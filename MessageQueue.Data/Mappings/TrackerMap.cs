@@ -13,7 +13,7 @@ namespace MessageQueue.Data.Mappings
             builder.HasKey(k => k.Id);
 
             builder.Property(p => p.ProjectName)
-                .HasMaxLength(500)
+                .HasMaxLength(200)
                 .IsRequired();
         }
     }
