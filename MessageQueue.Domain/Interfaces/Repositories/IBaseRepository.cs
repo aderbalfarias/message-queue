@@ -15,6 +15,7 @@ namespace MessageQueue.Domain.Interfaces.Repositories
         Task<IEnumerable<TEntity>> GetAsync<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class;
         TEntity GetObject<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class;
         Task<TEntity> GetObjectAsync<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class;
+        Task<TEntity> GetObjectWithInclude<TEntity>(Expression<Func<TEntity, bool>> predicate, string include) where TEntity : class;
         Task<int> Add<TEntity>(TEntity entity);
         Task<int> Update<TEntity>(TEntity entity);
     }
