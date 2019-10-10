@@ -18,9 +18,9 @@ namespace MessageQueue.Data.Config
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new TestMap());
+            modelBuilder.ApplyConfiguration(new TrackerMap());
         }
 
-        public DbSet<TestEntity> Test { get; set; }
+        public DbSet<TrackerEntity> Test { get; set; }
     }
 }
