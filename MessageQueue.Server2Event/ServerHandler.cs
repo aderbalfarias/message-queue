@@ -2,6 +2,7 @@
 using NServiceBus;
 using NServiceBus.Logging;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace MessageQueue.Server2Event
 {
@@ -13,8 +14,10 @@ namespace MessageQueue.Server2Event
         {
             nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler)}");
             
-            // Implement logic and log
-            
+            using(TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                // Implement logic and log
+            }
 
             return Task.CompletedTask;
         }

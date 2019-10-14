@@ -30,7 +30,7 @@ namespace MessageQueue.Domain.Services
                 var message = new MessageEventEntity
                 {
                     Id = 1,
-                    Description = "Test Event message"
+                    Description = "Test Event message using NServiceBus"
                 };
 
                 await _messageSession.Publish(message).ConfigureAwait(false);
