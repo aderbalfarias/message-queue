@@ -20,6 +20,6 @@ namespace MessageQueue.Data.Config
             modelBuilder.ApplyConfiguration(new TrackerMap());
         }
 
-        public DbSet<TrackerEntity> Test { get; set; }
+        public DbSet<TrackerEntity> Tracker { get; set; }
     }
 }
