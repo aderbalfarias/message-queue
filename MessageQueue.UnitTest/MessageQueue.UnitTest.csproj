@@ -16,4 +16,9 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MessageQueue.Domain\MessageQueue.Domain.csproj" />
+    <ProjectReference Include="..\MessageQueue.Server1Event\MessageQueue.Server1Event.csproj" />
+  </ItemGroup>
+
 </Project>

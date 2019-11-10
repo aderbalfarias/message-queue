@@ -10,6 +10,8 @@ namespace MessageQueue.Server1Event
     {
         private readonly ILog nsbLog = LogManager.GetLogger<ServerHandler>();
 
+
+
         public Task Handle(MessageEventEntity message, IMessageHandlerContext context)
         {
             try
