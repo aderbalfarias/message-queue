@@ -1,6 +1,7 @@
 ﻿using MessageQueue.Domain.Entities;
 using NServiceBus;
 using NServiceBus.Logging;
+using System;
 using System.Threading.Tasks;
 using System.Transactions;
 
@@ -12,14 +13,22 @@ namespace MessageQueue.Server2Event
 
         public Task Handle(MessageEventEntity message, IMessageHandlerContext context)
         {
-            nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler)}");
-            
-            using(TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            try
             {
-                // Implement logic and log
-            }
+                nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler)}");
 
-            return Task.CompletedTask;
+                // TransactionScope may cause issues
+                using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    // Implement logic and log
+                }
+
+                return Task.CompletedTask;
+            }
+            catch (Exception e)
+            {
+                return Task.FromException(e);
+            }
         }
     }
 }
