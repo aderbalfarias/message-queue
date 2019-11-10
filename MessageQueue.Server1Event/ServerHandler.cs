@@ -1,6 +1,7 @@
 ﻿using MessageQueue.Domain.Entities;
 using NServiceBus;
 using NServiceBus.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace MessageQueue.Server1Event
@@ -11,12 +12,18 @@ namespace MessageQueue.Server1Event
 
         public Task Handle(MessageEventEntity message, IMessageHandlerContext context)
         {
-            nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler)}");
-            
-            // Implement logic and log
-            
+            try
+            {
+                nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler)}");
 
-            return Task.CompletedTask;
+                // Implement logic and log
+
+                return Task.CompletedTask;
+            }
+            catch(Exception e)
+            {
+                return Task.FromException(e);
+            }
         }
     }
 }
