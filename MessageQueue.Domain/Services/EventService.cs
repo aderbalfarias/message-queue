@@ -13,8 +13,8 @@ namespace MessageQueue.Domain.Services
         private readonly IBaseRepository _baseRepository;
         private readonly ILogger<CommandService> _logger;
         private readonly IMessageSession _messageSession;
-        
-        public EventService(IBaseRepository baseRepository, 
+
+        public EventService(IBaseRepository baseRepository,
             ILogger<CommandService> logger,
             IMessageSession messageSession)
         {

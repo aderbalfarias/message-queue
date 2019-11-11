@@ -28,7 +28,7 @@ namespace MessageQueue.Server1Event
 
                 return Task.CompletedTask;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Task.FromException(e);
             }

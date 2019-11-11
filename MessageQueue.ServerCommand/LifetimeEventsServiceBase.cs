@@ -1,5 +1,4 @@
-﻿using MessageQueue.Domain.Interfaces.Services;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NServiceBus;
 using System;

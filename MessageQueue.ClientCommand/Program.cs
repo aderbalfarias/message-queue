@@ -44,7 +44,7 @@ namespace MessageQueue.ClientCommand
                     services.Repositories();
 
                     NserviceBus.Configuration
-                        .Register(hostContext, services, connectionName, nServiceBusSection, 
+                        .Register(hostContext, services, connectionName, nServiceBusSection,
                             appSection, true, messageTypeRoute: typeof(MessageCommandEntity));
                 })
                 .ConfigureLogging((hostContext, configLogging) =>
@@ -57,7 +57,7 @@ namespace MessageQueue.ClientCommand
             if (isService)
             {
                 await builder
-                    .ConfigureServices((hostContext, services) 
+                    .ConfigureServices((hostContext, services)
                         => services.AddSingleton<IHostLifetime, LifetimeEventsServiceBase>())
                     .Build()
                     .RunAsync();
@@ -66,7 +66,7 @@ namespace MessageQueue.ClientCommand
             {
                 builder.ConfigureServices((hostContext, services)
                         => services.AddHostedService<ConsoleHost>());
-                
+
                 await builder.RunConsoleAsync();
             }
         }

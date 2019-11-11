@@ -24,7 +24,7 @@ namespace MessageQueue.ServerCommand
                 nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler)}");
 
                 // Implement logic and log
-                
+
                 return Task.CompletedTask;
             }
             catch (Exception e)
