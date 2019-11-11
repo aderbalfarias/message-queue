@@ -55,7 +55,7 @@ namespace MessageQueue.ClientEvent
             if (isService)
             {
                 await builder
-                    .ConfigureServices((hostContext, services) 
+                    .ConfigureServices((hostContext, services)
                         => services.AddSingleton<IHostLifetime, LifetimeEventsServiceBase>())
                     .Build()
                     .RunAsync();
@@ -64,7 +64,7 @@ namespace MessageQueue.ClientEvent
             {
                 builder.ConfigureServices((hostContext, services)
                         => services.AddHostedService<ConsoleHost>());
-                
+
                 await builder.RunConsoleAsync();
             }
         }

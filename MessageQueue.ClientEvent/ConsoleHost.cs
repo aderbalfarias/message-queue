@@ -15,7 +15,7 @@ namespace MessageQueue.ClientEvent
         private readonly IEndpointInstance _endpointInstance;
 
         public ConsoleHost(
-            ILogger<ConsoleHost> logger, 
+            ILogger<ConsoleHost> logger,
             IEventService eventService,
             IEndpointInstance endpointInstance)
         {

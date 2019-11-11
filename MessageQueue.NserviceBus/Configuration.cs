@@ -26,7 +26,7 @@ namespace MessageQueue.NserviceBus
         /// <param name="messageTypePublisher">Message type in case of subscription to an endpoint</param>
         /// <returns></returns>
         public static Task Register(
-            HostBuilderContext hostContext, 
+            HostBuilderContext hostContext,
             IServiceCollection services,
             string connectionName,
             string nServiceBusSection,
@@ -41,7 +41,7 @@ namespace MessageQueue.NserviceBus
 
             var endpointConfiguration = new EndpointConfiguration(serviceBusSettings.ProjectEndpoint);
 
-            endpointConfiguration.TransportConfig(hostContext, serviceBusSettings, 
+            endpointConfiguration.TransportConfig(hostContext, serviceBusSettings,
                 connectionName, messageTypeRoute, messageTypePublisher);
 
             endpointConfiguration.AutoSubscribe();
@@ -51,7 +51,7 @@ namespace MessageQueue.NserviceBus
             endpointConfiguration.SendHeartbeatTo(serviceBusSettings.SendFailedMessagesTo);
             endpointConfiguration.AuditProcessedMessagesTo(serviceBusSettings.AuditProcessedMessagesTo);
             endpointConfiguration.SendFailedMessagesTo(serviceBusSettings.SendFailedMessagesTo);
-           
+
             // endpointConfiguration.RetryConfig(serviceBusSettings);
             // endpointConfiguration.MetricsConfig(serviceBusSettings);
             endpointConfiguration.PersistenceConfig(hostContext, serviceBusSettings, connectionName);
@@ -75,13 +75,13 @@ namespace MessageQueue.NserviceBus
             else
             {
                 services.AddSingleton(endpointConfiguration);
-            }           
+            }
 
             return Task.CompletedTask;
         }
 
         private static Task TransportConfig(this EndpointConfiguration endpointConfiguration,
-            HostBuilderContext hostContext, NServiceBusSettings serviceBusSettings, 
+            HostBuilderContext hostContext, NServiceBusSettings serviceBusSettings,
             string connectionName, Type messageTypeRoute = null, Type messageTypePublisher = null)
         {
             var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
@@ -91,10 +91,10 @@ namespace MessageQueue.NserviceBus
 
             if (messageTypeRoute != null && !string.IsNullOrEmpty(serviceBusSettings.RouteToEndpoint))
                 transport.Routing().RouteToEndpoint(messageTypeRoute, serviceBusSettings.RouteToEndpoint);
-            
+
             if (messageTypePublisher != null && !string.IsNullOrEmpty(serviceBusSettings.SubscribeToEndpoint))
                 transport.Routing().RegisterPublisher(messageTypePublisher, serviceBusSettings.SubscribeToEndpoint);
-            
+
             return Task.CompletedTask;
         }
 
