@@ -1,4 +1,5 @@
 ﻿using MessageQueue.Domain.Entities;
+using MessageQueue.Domain.Interfaces.Repositories;
 using NServiceBus;
 using NServiceBus.Logging;
 using System;
@@ -9,6 +10,12 @@ namespace MessageQueue.ServerCommand
     public class ServerHandler : IHandleMessages<MessageCommandEntity>
     {
         private readonly ILog nsbLog = LogManager.GetLogger<ServerHandler>();
+        private readonly IBaseRepository _baseRepository;
+
+        public ServerHandler(IBaseRepository baseRepository)
+        {
+            _baseRepository = baseRepository;
+        }
 
         public Task Handle(MessageCommandEntity message, IMessageHandlerContext context)
         {
