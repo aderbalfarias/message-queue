@@ -21,7 +21,7 @@ namespace MessageQueue.Server1Event
         {
             try
             {
-                nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler)}");
+                nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler).FullName}");
 
                 //_baseRepository.GetObjectAsync<>(t => t.Id == x)
                 // Implement logic and log
@@ -30,6 +30,7 @@ namespace MessageQueue.Server1Event
             }
             catch (Exception e)
             {
+                nsbLog.Info($"Message {message.Id} throw exception at {typeof(ServerHandler).FullName}");
                 return Task.FromException(e);
             }
         }

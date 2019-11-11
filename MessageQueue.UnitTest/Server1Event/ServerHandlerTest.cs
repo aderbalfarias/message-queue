@@ -12,6 +12,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace MessageQueue.UnitTest.Server1Event
 {
@@ -122,5 +123,34 @@ namespace MessageQueue.UnitTest.Server1Event
         public static string LogStatements => logStatements.ToString();
 
         #endregion End LogManager
+
+        #region Tests
+
+        [Fact]
+        public async Task When_Handle_Receive_Message_Should_Log_Correctly()
+        {
+            await RepositorySetup();
+
+            await _serverHandler.Handle(MockMessage, _context).ConfigureAwait(false);
+
+            var expectedLog = $"Message {MockMessage.Id} received at MessageQueue.Server1Event.ServerHandler";
+
+            Assert.Contains(expectedLog, LogStatements);
+        }
+
+        [Fact]
+        public async Task When_Handle_Should_Log_Exception()
+        {
+            await RepositorySetup();
+
+            //var exception = Assert
+            //    .ThrowsAny<Exception>(await _serverHandler.Handle(MockMessage, _context).ConfigureAwait(false));
+
+            var expectedLog = $"Message {MockMessage.Id} throw exception at MessageQueue.Server1Event.ServerHandler";
+
+            Assert.Contains(expectedLog, LogStatements);
+        }
+
+        #endregion End Tests
     }
 }
