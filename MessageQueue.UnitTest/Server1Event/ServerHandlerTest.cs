@@ -139,12 +139,23 @@ namespace MessageQueue.UnitTest.Server1Event
         }
 
         [Fact]
+        public async Task When_Handle_Should_Execute_Without_Exception()
+        {
+            await RepositorySetup();
+
+            var exception = await Record.ExceptionAsync(()
+                => _serverHandler.Handle(MockMessage, _context));
+
+            Assert.Null(exception);
+        }
+
+        [Fact]
         public async Task When_Handle_Should_Log_Exception()
         {
             await RepositorySetup();
 
-            //var exception = Assert
-            //    .ThrowsAny<Exception>(await _serverHandler.Handle(MockMessage, _context).ConfigureAwait(false));
+            var exception = Assert.ThrowsAnyAsync<Exception>(() 
+                => _serverHandler.Handle(MockMessage, _context));
 
             var expectedLog = $"Message {MockMessage.Id} throw exception at MessageQueue.Server1Event.ServerHandler";
 
