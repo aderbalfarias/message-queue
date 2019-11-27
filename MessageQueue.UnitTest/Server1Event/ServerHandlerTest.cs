@@ -77,7 +77,7 @@ namespace MessageQueue.UnitTest.Server1Event
         private MessageEventEntity MockMessage => new MessageEventEntity
         {
             Id = 1,
-            Description = "Testing NserviceBus"
+            Description = "123"
         };
 
         private IEnumerable<TrackerEntity> MockTrackerEntity
@@ -153,9 +153,11 @@ namespace MessageQueue.UnitTest.Server1Event
         public async Task When_Handle_Should_Log_Exception()
         {
             await RepositorySetup();
+            var message = MockMessage;
+            message.Description = "test error";
 
             var exception = Assert.ThrowsAnyAsync<Exception>(() 
-                => _serverHandler.Handle(MockMessage, _context));
+                => _serverHandler.Handle(message, _context));
 
             var expectedLog = $"Message {MockMessage.Id} throw exception at MessageQueue.Server1Event.ServerHandler";
 
