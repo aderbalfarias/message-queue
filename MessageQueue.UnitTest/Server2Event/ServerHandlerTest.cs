@@ -1,6 +1,6 @@
 ﻿using MessageQueue.Domain.Entities;
 using MessageQueue.Domain.Interfaces.Repositories;
-using MessageQueue.Server1Event;
+using MessageQueue.Server2Event;
 using Moq;
 using NServiceBus.Logging;
 using NServiceBus.Testing;
@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace MessageQueue.UnitTest.Server1Event
+namespace MessageQueue.UnitTest.Server2Event
 {
     public class ServerHandlerTest
     {
@@ -132,7 +132,7 @@ namespace MessageQueue.UnitTest.Server1Event
 
             await _serverHandler.Handle(MockMessage, _context).ConfigureAwait(false);
 
-            var expectedLog = $"Message {MockMessage.Id} received at MessageQueue.Server1Event.ServerHandler";
+            var expectedLog = $"Message {MockMessage.Id} received at MessageQueue.Server2Event.ServerHandler";
 
             Assert.Contains(expectedLog, LogStatements);
         }
@@ -146,21 +146,6 @@ namespace MessageQueue.UnitTest.Server1Event
                 => _serverHandler.Handle(MockMessage, _context));
 
             Assert.Null(exception);
-        }
-
-        [Fact]
-        public async Task When_Handle_Should_Log_Exception()
-        {
-            await RepositorySetup();
-            var message = MockMessage;
-            message.Description = "test error";
-
-            var exception = Assert.ThrowsAnyAsync<Exception>(()
-                => _serverHandler.Handle(message, _context));
-
-            var expectedLog = $"Message {MockMessage.Id} throw exception at MessageQueue.Server1Event.ServerHandler";
-
-            Assert.Contains(expectedLog, LogStatements);
         }
 
         #endregion End Tests
