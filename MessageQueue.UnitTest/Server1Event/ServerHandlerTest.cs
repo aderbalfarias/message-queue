@@ -5,7 +5,6 @@ using Moq;
 using NServiceBus.Logging;
 using NServiceBus.Testing;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,7 +24,7 @@ namespace MessageQueue.UnitTest.Server1Event
         private readonly TestableMessageHandlerContext _context;
 
         static StringBuilder logStatements = new StringBuilder();
-        
+
         #endregion End Fields 
 
         #region Constructor
@@ -156,7 +155,7 @@ namespace MessageQueue.UnitTest.Server1Event
             var message = MockMessage;
             message.Description = "test error";
 
-            var exception = Assert.ThrowsAnyAsync<Exception>(() 
+            var exception = Assert.ThrowsAnyAsync<Exception>(()
                 => _serverHandler.Handle(message, _context));
 
             var expectedLog = $"Message {MockMessage.Id} throw exception at MessageQueue.Server1Event.ServerHandler";
