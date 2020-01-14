@@ -132,7 +132,8 @@ namespace MessageQueue.UnitTest.Server2Event
 
             await _serverHandler.Handle(MockMessage, _context).ConfigureAwait(false);
 
-            var expectedLog = $"Message {MockMessage.Id} received at MessageQueue.Server2Event.ServerHandler";
+            var expectedLog = $"Message {MockMessage.Id} received " +
+                $"at MessageQueue.Server2Event.ServerHandler";
 
             Assert.Contains(expectedLog, LogStatements);
         }
