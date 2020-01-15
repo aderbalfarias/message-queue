@@ -1,18 +1,13 @@
 ﻿using MessageQueue.Domain.Entities;
 using MessageQueue.Domain.Interfaces.Repositories;
 using MessageQueue.Domain.Services;
-using MessageQueue.Server2Event;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NServiceBus;
-using NServiceBus.Logging;
-using NServiceBus.Testing;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
