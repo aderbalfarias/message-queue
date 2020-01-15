@@ -1,43 +1,39 @@
 ﻿using MessageQueue.Domain.Entities;
 using MessageQueue.Domain.Interfaces.Repositories;
-using MessageQueue.Server2Event;
+using MessageQueue.Domain.Services;
+using Microsoft.Extensions.Logging;
 using Moq;
-using NServiceBus.Logging;
-using NServiceBus.Testing;
+using NServiceBus;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace MessageQueue.UnitTest.Server2Event
+namespace MessageQueue.UnitTest.Domain
 {
-    public class ServerHandlerTest
+    public class MessageQueueDomainTest
     {
         #region Fields 
 
         private readonly Mock<IBaseRepository> _mockBaseRepository;
-        private readonly ServerHandler _serverHandler;
-        private readonly TestableMessageHandlerContext _context;
-
-        static StringBuilder logStatements = new StringBuilder();
+        private readonly Mock<ILogger<CommandService>> _mockLogger;
+        private readonly Mock<IMessageSession> _mockMessageSession;
+        private readonly EventService _eventService;
 
         #endregion End Fields 
 
         #region Constructor
 
-        public ServerHandlerTest()
+        public MessageQueueDomainTest()
         {
-            InitializeLogManager();
-
             _mockBaseRepository = new Mock<IBaseRepository>();
+            _mockLogger = new Mock<ILogger<CommandService>>();
+            _mockMessageSession = new Mock<IMessageSession>();
 
-            _serverHandler = new ServerHandler(_mockBaseRepository.Object);
-
-            _context = new TestableMessageHandlerContext();
+            _eventService = new EventService(_mockBaseRepository.Object,
+                _mockLogger.Object, _mockMessageSession.Object);
         }
 
         #endregion End Constructor
@@ -107,46 +103,21 @@ namespace MessageQueue.UnitTest.Server2Event
 
         #endregion End Mocks
 
-        #region LogManager
-
-        private Task InitializeLogManager()
-        {
-            logStatements.Clear();
-
-            LogManager.Use<TestingLoggerFactory>()
-                .WriteTo(new StringWriter(logStatements));
-
-            return Task.CompletedTask;
-        }
-
-        public static string LogStatements => logStatements.ToString();
-
-        #endregion End LogManager
-
         #region Tests
 
         [Fact]
-        public async Task When_Handle_Receive_Message_Should_Log_Correctly()
+        public async Task When_EventService_Should_Log_PublishedMessage()
         {
             await RepositorySetup();
 
-            await _serverHandler.Handle(MockMessage, _context).ConfigureAwait(false);
+            await _eventService.PublishMessageAsync();
 
-            var expectedLog = $"Message {MockMessage.Id} received " +
-                $"at MessageQueue.Server2Event.ServerHandler";
+            var successfulMessage = "Message id 1 published successfully";
 
-            Assert.Contains(expectedLog, LogStatements);
-        }
-
-        [Fact]
-        public async Task When_Handle_Should_Execute_Without_Exception()
-        {
-            await RepositorySetup();
-
-            var exception = await Record.ExceptionAsync(()
-                => _serverHandler.Handle(MockMessage, _context));
-
-            Assert.Null(exception);
+            _mockLogger.Verify(x =>
+                x.Log(Microsoft.Extensions.Logging.LogLevel.Information, It.IsAny<EventId>(),
+                    It.Is<It.IsAnyType>((o, t) => string.Equals(successfulMessage, o.ToString())),
+                    It.IsAny<Exception>(), (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()), Times.Once);
         }
 
         #endregion End Tests
