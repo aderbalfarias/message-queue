@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Server2Event",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 Tests", "04 Tests", "{CBA15DAA-30CD-412C-A991-FAE955068BA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.UnitTest", "MessageQueue.UnitTest\MessageQueue.UnitTest.csproj", "{4AA2C211-0CD9-45AB-A25F-927C41C40DCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.UnitTest", "MessageQueue.UnitTest\MessageQueue.UnitTest.csproj", "{4AA2C211-0CD9-45AB-A25F-927C41C40DCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.ClientCommand.V2", "MessageQueue.ClientCommand.V2\MessageQueue.ClientCommand.V2.csproj", "{C3556FDB-36AB-4CD1-99A2-0F36B9D0A896}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{4AA2C211-0CD9-45AB-A25F-927C41C40DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AA2C211-0CD9-45AB-A25F-927C41C40DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AA2C211-0CD9-45AB-A25F-927C41C40DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3556FDB-36AB-4CD1-99A2-0F36B9D0A896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3556FDB-36AB-4CD1-99A2-0F36B9D0A896}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3556FDB-36AB-4CD1-99A2-0F36B9D0A896}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3556FDB-36AB-4CD1-99A2-0F36B9D0A896}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +98,7 @@ Global
 		{4A00A4DA-0656-4A6D-9C39-C751EBE8605F} = {E48E0C9E-258B-42E7-9345-366A32F9F4E1}
 		{DE80F970-BDA3-433A-8FBD-054B763E3E23} = {E48E0C9E-258B-42E7-9345-366A32F9F4E1}
 		{4AA2C211-0CD9-45AB-A25F-927C41C40DCE} = {CBA15DAA-30CD-412C-A991-FAE955068BA3}
+		{C3556FDB-36AB-4CD1-99A2-0F36B9D0A896} = {E48E0C9E-258B-42E7-9345-366A32F9F4E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4059BD86-C7C8-447C-8642-844A5F112127}
