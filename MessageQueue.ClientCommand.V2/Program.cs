@@ -9,8 +9,6 @@ namespace MessageQueue.ClientCommand.V2
 {
     public class Program
     {
-        private const string configFiles = "appsettings";
-        private const string extension = "json";
         private const string appSection = "AppSettings";
         private const string nServiceBusSection = "NServiceBusSettings";
         private const string connectionName = "PrimaryConnection";
