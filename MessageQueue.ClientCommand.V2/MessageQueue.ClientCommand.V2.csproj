@@ -12,5 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MessageQueue.Domain\MessageQueue.Domain.csproj" />
+    <ProjectReference Include="..\MessageQueue.IoC\MessageQueue.IoC.csproj" />
+    <ProjectReference Include="..\MessageQueue.NserviceBus\MessageQueue.NserviceBus.csproj" />
   </ItemGroup>
 </Project>
