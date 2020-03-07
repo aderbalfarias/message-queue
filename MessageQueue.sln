@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.ClientCommand", "MessageQueue.ClientCommand\MessageQueue.ClientCommand.csproj", "{AC408378-EB82-4CE9-BD8D-D8ED9053DB1E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Data", "MessageQueue.Data\MessageQueue.Data.csproj", "{A2F59A35-5A53-4404-8859-20A7AC2D206D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Domain", "MessageQueue.Domain\MessageQueue.Domain.csproj", "{E3842EC3-6FCE-4E75-BFA4-43614C139E9E}"
@@ -39,10 +37,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC408378-EB82-4CE9-BD8D-D8ED9053DB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC408378-EB82-4CE9-BD8D-D8ED9053DB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC408378-EB82-4CE9-BD8D-D8ED9053DB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC408378-EB82-4CE9-BD8D-D8ED9053DB1E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2F59A35-5A53-4404-8859-20A7AC2D206D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2F59A35-5A53-4404-8859-20A7AC2D206D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2F59A35-5A53-4404-8859-20A7AC2D206D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -88,7 +82,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{AC408378-EB82-4CE9-BD8D-D8ED9053DB1E} = {E48E0C9E-258B-42E7-9345-366A32F9F4E1}
 		{A2F59A35-5A53-4404-8859-20A7AC2D206D} = {0D0F04FF-AA9B-4ECD-AD83-E3CDB8F9D02F}
 		{E3842EC3-6FCE-4E75-BFA4-43614C139E9E} = {A381A76F-D474-4F4A-B9C3-EA47395A578F}
 		{0E1A3941-8EC9-42AA-92E2-AB359F5E6375} = {0D0F04FF-AA9B-4ECD-AD83-E3CDB8F9D02F}
