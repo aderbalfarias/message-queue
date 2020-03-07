@@ -115,7 +115,7 @@ namespace MessageQueue.UnitTest.Domain
             var successfulMessage = "Message id 1 published successfully";
 
             _mockLogger.Verify(x =>
-                x.Log(Microsoft.Extensions.Logging.LogLevel.Information, It.IsAny<EventId>(),
+                x.Log(LogLevel.Information, It.IsAny<EventId>(),
                     It.Is<It.IsAnyType>((o, t) => string.Equals(successfulMessage, o.ToString())),
                     It.IsAny<Exception>(), (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()), Times.Once);
         }
