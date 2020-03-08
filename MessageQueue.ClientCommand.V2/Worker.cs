@@ -39,9 +39,9 @@ namespace MessageQueue.ClientCommand.V2
         {
             _endpointInstance?.Stop().ConfigureAwait(false);
 
-            _logger.LogInformation("Windows service stopped");
-
             await base.StopAsync(cancellationToken);
+
+            _logger.LogInformation("Windows service stopped");
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

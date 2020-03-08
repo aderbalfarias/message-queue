@@ -10,20 +10,19 @@ namespace MessageQueue.ServerCommand.V2
 {
     public class Worker : BackgroundService
     {
+        private IEndpointInstance _endpointInstance;
+
         private readonly ILogger<Worker> _logger;
-        private readonly ICommandService _commandService;
-        private readonly IEndpointInstance _endpointInstance;
+        private readonly EndpointConfiguration _endpointConfiguration;
 
         public Worker
         (
             ILogger<Worker> logger,
-            ICommandService commandService,
-            IEndpointInstance endpointInstance
+            EndpointConfiguration endpointConfiguration
         )
         {
             _logger = logger;
-            _commandService = commandService;
-            _endpointInstance = endpointInstance;
+            _endpointConfiguration = endpointConfiguration;
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
@@ -32,16 +31,19 @@ namespace MessageQueue.ServerCommand.V2
 
             await base.StartAsync(cancellationToken);
 
-            await _commandService.SendMessageAsync();
+            _endpointInstance = Endpoint
+                .Start(_endpointConfiguration)
+                .GetAwaiter()
+                .GetResult();
         }
 
         public override async Task StopAsync(CancellationToken cancellationToken)
         {
             _endpointInstance?.Stop().ConfigureAwait(false);
 
-            _logger.LogInformation("Windows service stopped");
-
             await base.StopAsync(cancellationToken);
+
+            _logger.LogInformation("Windows service stopped");
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
