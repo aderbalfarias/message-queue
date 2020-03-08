@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MessageQueue.Domain\MessageQueue.Domain.csproj" />
-    <ProjectReference Include="..\MessageQueue.Server2Event\MessageQueue.Server2Event.csproj" />
   </ItemGroup>
 
 </Project>
