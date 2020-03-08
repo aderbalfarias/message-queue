@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "MessageQueue.ClientEvent.V2": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
