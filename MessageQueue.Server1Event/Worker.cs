@@ -26,23 +26,37 @@ namespace MessageQueue.Server1Event
 
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Windows service started");
+            try
+            {
+                _logger.LogInformation("Windows service started");
 
-            await base.StartAsync(cancellationToken);
+                await base.StartAsync(cancellationToken);
 
-            _endpointInstance = Endpoint
-                .Start(_endpointConfiguration)
-                .GetAwaiter()
-                .GetResult();
+                _endpointInstance = Endpoint
+                    .Start(_endpointConfiguration)
+                    .GetAwaiter()
+                    .GetResult();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Exception at StartAsync method, Error: {e}");
+            }
         }
 
         public override async Task StopAsync(CancellationToken cancellationToken)
         {
-            _endpointInstance?.Stop().ConfigureAwait(false);
+            try
+            {
+                _endpointInstance?.Stop().ConfigureAwait(false);
 
-            await base.StopAsync(cancellationToken);
+                await base.StopAsync(cancellationToken);
 
-            _logger.LogInformation("Windows service stopped");
+                _logger.LogInformation("Windows service stopped");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Exception at StopAsync method, Error: {e}");
+            }
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
