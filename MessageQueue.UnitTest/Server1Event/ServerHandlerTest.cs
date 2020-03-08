@@ -114,7 +114,7 @@ namespace MessageQueue.UnitTest.Server1Event
             logStatements.Clear();
 
             LogManager.Use<TestingLoggerFactory>()
-                .WriteTo(new StringWriter(logStatements));
+                .BeginScope(new StringWriter(logStatements));
 
             return Task.CompletedTask;
         }
