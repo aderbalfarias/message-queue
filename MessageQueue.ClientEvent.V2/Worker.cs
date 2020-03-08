@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using MessageQueue.Domain.Interfaces.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NServiceBus;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MessageQueue.ClientEvent.V2
 {
