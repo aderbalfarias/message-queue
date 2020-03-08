@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace MessageQueue.ClientCommand.V2
+namespace MessageQueue.ServerCommand.V2
 {
     public class Program
     {
@@ -31,8 +31,7 @@ namespace MessageQueue.ClientCommand.V2
                     services.Repositories();
 
                     NserviceBus.Configuration
-                        .Register(hostContext, services, connectionName, nServiceBusSection,
-                            appSection, true, messageTypeRoute: typeof(MessageCommandEntity));
+                        .Register(hostContext, services, connectionName, nServiceBusSection, appSection);
                 })
                 .UseSerilog((context, config) => config.ReadFrom.Configuration(context.Configuration));
     }
