@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "MessageQueue.Server1Event.V2": {
+    "MessageQueue.Server1Event": {
       "commandName": "Project",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"

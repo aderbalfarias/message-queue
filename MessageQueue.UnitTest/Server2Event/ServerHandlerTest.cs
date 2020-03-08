@@ -1,5 +1,6 @@
 ﻿using MessageQueue.Domain.Entities;
 using MessageQueue.Domain.Interfaces.Repositories;
+using MessageQueue.Server2Event;
 using Moq;
 using NServiceBus.Logging;
 using NServiceBus.Testing;

@@ -1,3 +1,4 @@
+using MessageQueue.Domain.Interfaces.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NServiceBus;
@@ -5,23 +6,24 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MessageQueue.Server2Event.V2
+namespace MessageQueue.ClientEvent
 {
     public class Worker : BackgroundService
     {
-        private IEndpointInstance _endpointInstance;
-
         private readonly ILogger<Worker> _logger;
-        private readonly EndpointConfiguration _endpointConfiguration;
+        private readonly IEventService _eventService;
+        private readonly IEndpointInstance _endpointInstance;
 
         public Worker
         (
             ILogger<Worker> logger,
-            EndpointConfiguration endpointConfiguration
+            IEventService eventService,
+            IEndpointInstance endpointInstance
         )
         {
             _logger = logger;
-            _endpointConfiguration = endpointConfiguration;
+            _eventService = eventService;
+            _endpointInstance = endpointInstance;
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
@@ -30,10 +32,7 @@ namespace MessageQueue.Server2Event.V2
 
             await base.StartAsync(cancellationToken);
 
-            _endpointInstance = Endpoint
-                .Start(_endpointConfiguration)
-                .GetAwaiter()
-                .GetResult();
+            await _eventService.PublishMessageAsync();
         }
 
         public override async Task StopAsync(CancellationToken cancellationToken)

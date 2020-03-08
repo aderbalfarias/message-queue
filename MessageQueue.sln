@@ -21,15 +21,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 Tests", "04 Tests", "{CB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.UnitTest", "MessageQueue.UnitTest\MessageQueue.UnitTest.csproj", "{4AA2C211-0CD9-45AB-A25F-927C41C40DCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.ClientCommand.V2", "MessageQueue.ClientCommand.V2\MessageQueue.ClientCommand.V2.csproj", "{C3556FDB-36AB-4CD1-99A2-0F36B9D0A896}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.ClientCommand", "MessageQueue.ClientCommand\MessageQueue.ClientCommand.csproj", "{C3556FDB-36AB-4CD1-99A2-0F36B9D0A896}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.ServerCommand.V2", "MessageQueue.ServerCommand.V2\MessageQueue.ServerCommand.V2.csproj", "{55928ACB-0B98-45A3-82B2-B8BFC62FE312}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.ServerCommand", "MessageQueue.ServerCommand\MessageQueue.ServerCommand.csproj", "{55928ACB-0B98-45A3-82B2-B8BFC62FE312}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.ClientEvent.V2", "MessageQueue.ClientEvent.V2\MessageQueue.ClientEvent.V2.csproj", "{0AB96983-4E24-4F77-AA9B-4C7FB0268E26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.ClientEvent", "MessageQueue.ClientEvent\MessageQueue.ClientEvent.csproj", "{0AB96983-4E24-4F77-AA9B-4C7FB0268E26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.Server1Event.V2", "MessageQueue.Server1Event.V2\MessageQueue.Server1Event.V2.csproj", "{A82E275B-7D45-4F61-B4CE-09C88D80C91D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Server1Event", "MessageQueue.Server1Event\MessageQueue.Server1Event.csproj", "{A82E275B-7D45-4F61-B4CE-09C88D80C91D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.Server2Event.V2", "MessageQueue.Server2Event.V2\MessageQueue.Server2Event.V2.csproj", "{FA780120-503D-49C2-B1E9-8389750C3EDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Server2Event", "MessageQueue.Server2Event\MessageQueue.Server2Event.csproj", "{FA780120-503D-49C2-B1E9-8389750C3EDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

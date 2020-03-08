@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MessageQueue.ServerCommand.V2
+namespace MessageQueue.ServerCommand
 {
     public class Worker : BackgroundService
     {
