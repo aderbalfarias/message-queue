@@ -28,14 +28,11 @@ namespace MessageQueue.ClientCommand.V2
 
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
-            // Code implementation
-
-            // Perform post-startup activities here
-            await _commandService.SendMessageAsync();
-
             _logger.LogInformation("Windows service started");
 
             await base.StartAsync(cancellationToken);
+
+            await _commandService.SendMessageAsync();
         }
 
         public override async Task StopAsync(CancellationToken cancellationToken)
