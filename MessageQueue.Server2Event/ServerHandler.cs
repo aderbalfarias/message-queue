@@ -24,11 +24,6 @@ namespace MessageQueue.Server2Event
             {
                 nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler)}");
 
-                // TransactionScope may cause issues
-                using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-                {
-                    // Implement logic and log
-                }
 
                 return Task.CompletedTask;
             }

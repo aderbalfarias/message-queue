@@ -24,7 +24,7 @@ namespace MessageQueue.Server1Event
                 nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler).FullName}");
 
                 var test = Convert.ToInt32(message.Description);
-                //_baseRepository.GetObjectAsync<>(t => t.Id == x)
+
                 // Implement logic and log
 
                 return Task.CompletedTask;
