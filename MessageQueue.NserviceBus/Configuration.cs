@@ -24,7 +24,8 @@ namespace MessageQueue.NserviceBus
         /// <param name="messageTypeRoute">Message type in case of route to an endpoint</param>
         /// <param name="messageTypePublisher">Message type in case of subscription to an endpoint</param>
         /// <returns></returns>
-        public static Task Register(
+        public static Task Register
+        (
             HostBuilderContext hostContext,
             IServiceCollection services,
             string connectionName,
@@ -32,7 +33,8 @@ namespace MessageQueue.NserviceBus
             string appSection,
             bool endpointStart = false,
             Type messageTypeRoute = null,
-            Type messageTypePublisher = null)
+            Type messageTypePublisher = null
+        )
         {
             var serviceBusSettings = hostContext.Configuration
                 .GetSection(nServiceBusSection)
@@ -61,7 +63,8 @@ namespace MessageQueue.NserviceBus
             endpointConfiguration.RegisterComponents(
                 registration: configureComponents =>
                 {
-                    configureComponents.RegisterSingleton(hostContext.Configuration.GetSection(appSection).Get<AppSettings>());
+                    configureComponents.RegisterSingleton(hostContext
+                            .Configuration.GetSection(appSection).Get<AppSettings>());
                 });
 
             if (endpointStart)
