@@ -11,7 +11,7 @@ namespace MessageQueue.ClientCommand
     {
         private const string appSection = "AppSettings";
         private const string nServiceBusSection = "NServiceBusSettings";
-        private const string connectionName = "PrimaryConnection";
+        private const string connectionName = "dbQueue";
 
         public static void Main(string[] args)
         {
