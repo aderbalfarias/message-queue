@@ -53,8 +53,12 @@ namespace MessageQueue.NserviceBus
             endpointConfiguration.AuditProcessedMessagesTo(serviceBusSettings.AuditProcessedMessagesTo);
             endpointConfiguration.SendFailedMessagesTo(serviceBusSettings.SendFailedMessagesTo);
 
-            // endpointConfiguration.RetryConfig(serviceBusSettings);
-            // endpointConfiguration.MetricsConfig(serviceBusSettings);
+            if (serviceBusSettings.UseRetry)
+                endpointConfiguration.RetryConfig(serviceBusSettings);
+
+            if (serviceBusSettings.UseMetrics)
+                endpointConfiguration.MetricsConfig(serviceBusSettings);
+            
             endpointConfiguration.PersistenceConfig(hostContext, serviceBusSettings, connectionName);
 
             var defaultFactory = LogManager.Use<DefaultFactory>();
