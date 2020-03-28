@@ -49,12 +49,18 @@ namespace MessageQueue.NserviceBus
             endpointConfiguration.EnableInstallers();
             endpointConfiguration.UsePersistence<SqlPersistence>();
             endpointConfiguration.UseContainer<ServicesBuilder>(c => c.ExistingServices(services));
-            endpointConfiguration.SendHeartbeatTo(serviceBusSettings.SendFailedMessagesTo);
             endpointConfiguration.AuditProcessedMessagesTo(serviceBusSettings.AuditProcessedMessagesTo);
             endpointConfiguration.SendFailedMessagesTo(serviceBusSettings.SendFailedMessagesTo);
 
-            // endpointConfiguration.RetryConfig(serviceBusSettings);
-            // endpointConfiguration.MetricsConfig(serviceBusSettings);
+            if (serviceBusSettings.UseHeartbeat)
+                endpointConfiguration.SendHeartbeatTo(serviceBusSettings.SendFailedMessagesTo);
+
+            if (serviceBusSettings.UseRetry)
+                endpointConfiguration.RetryConfig(serviceBusSettings);
+
+            if (serviceBusSettings.UseMetrics)
+                endpointConfiguration.MetricsConfig(serviceBusSettings);
+            
             endpointConfiguration.PersistenceConfig(hostContext, serviceBusSettings, connectionName);
 
             var defaultFactory = LogManager.Use<DefaultFactory>();
@@ -91,9 +97,8 @@ namespace MessageQueue.NserviceBus
             transport.ConnectionString(hostContext.Configuration.GetConnectionString(connectionName));
             transport.Transactions(TransportTransactionMode.SendsAtomicWithReceive);
 
-            // Previous versions 
-            //if (messageTypeRoute != null && !string.IsNullOrEmpty(serviceBusSettings.RouteToEndpoint))
-            //    transport.Routing().RouteToEndpoint(messageTypeRoute, serviceBusSettings.RouteToEndpoint);
+            if (messageTypeRoute != null && !string.IsNullOrEmpty(serviceBusSettings.RouteToEndpoint))
+                transport.Routing().RouteToEndpoint(messageTypeRoute, serviceBusSettings.RouteToEndpoint);
 
             // Previous versions 
             //if (messageTypePublisher != null && !string.IsNullOrEmpty(serviceBusSettings.SubscribeToEndpoint))
