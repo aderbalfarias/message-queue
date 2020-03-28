@@ -91,9 +91,8 @@ namespace MessageQueue.NserviceBus
             transport.ConnectionString(hostContext.Configuration.GetConnectionString(connectionName));
             transport.Transactions(TransportTransactionMode.SendsAtomicWithReceive);
 
-            // Previous versions 
-            //if (messageTypeRoute != null && !string.IsNullOrEmpty(serviceBusSettings.RouteToEndpoint))
-            //    transport.Routing().RouteToEndpoint(messageTypeRoute, serviceBusSettings.RouteToEndpoint);
+            if (messageTypeRoute != null && !string.IsNullOrEmpty(serviceBusSettings.RouteToEndpoint))
+                transport.Routing().RouteToEndpoint(messageTypeRoute, serviceBusSettings.RouteToEndpoint);
 
             // Previous versions 
             //if (messageTypePublisher != null && !string.IsNullOrEmpty(serviceBusSettings.SubscribeToEndpoint))
