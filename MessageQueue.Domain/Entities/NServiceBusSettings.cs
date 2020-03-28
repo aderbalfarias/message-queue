@@ -28,6 +28,8 @@ namespace MessageQueue.Domain.Entities
 
         public bool UseRetry { get; set; } = false;
 
+        public bool UseHeartbeat { get; set; } = false;
+
         public bool UseMetrics { get; set; } = false;
     }
 }

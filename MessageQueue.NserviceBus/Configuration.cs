@@ -49,9 +49,11 @@ namespace MessageQueue.NserviceBus
             endpointConfiguration.EnableInstallers();
             endpointConfiguration.UsePersistence<SqlPersistence>();
             endpointConfiguration.UseContainer<ServicesBuilder>(c => c.ExistingServices(services));
-            endpointConfiguration.SendHeartbeatTo(serviceBusSettings.SendFailedMessagesTo);
             endpointConfiguration.AuditProcessedMessagesTo(serviceBusSettings.AuditProcessedMessagesTo);
             endpointConfiguration.SendFailedMessagesTo(serviceBusSettings.SendFailedMessagesTo);
+
+            if (serviceBusSettings.UseHeartbeat)
+                endpointConfiguration.SendHeartbeatTo(serviceBusSettings.SendFailedMessagesTo);
 
             if (serviceBusSettings.UseRetry)
                 endpointConfiguration.RetryConfig(serviceBusSettings);
