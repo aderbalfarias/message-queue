@@ -10,7 +10,9 @@ namespace MessageQueue.Domain.Entities
 
         public string PathToLog { get; set; }
 
-        public int NumberOfRetries { get; set; }
+        public int NumberOfImmediateRetries { get; set; }
+
+        public int NumberOfDelayedRetries { get; set; }
 
         public string SendHeartbeatTo { get; set; }
 
