@@ -132,13 +132,13 @@ namespace MessageQueue.NserviceBus
             recoverability.Immediate(
                immediate =>
                {
-                   immediate.NumberOfRetries(serviceBusSettings.NumberOfRetries);
+                   immediate.NumberOfRetries(serviceBusSettings.NumberOfImmediateRetries);
                });
 
             recoverability.Delayed(
                delayed =>
                {
-                   delayed.NumberOfRetries(serviceBusSettings.NumberOfRetries);
+                   delayed.NumberOfRetries(serviceBusSettings.NumberOfDelayedRetries);
                    delayed.TimeIncrease(TimeSpan.FromSeconds(serviceBusSettings.RecoverabilityTimeIncreaseInSeconds));
                });
 
