@@ -22,7 +22,7 @@ namespace MessageQueue.Domain.Entities
 
         public string SendMetricDataToServiceControl { get; set; }
 
-        public int SendMetricDataToServiceControlIntervalInMilliseconds { get; set; }
+        public int MetricsIntervalInMilliseconds { get; set; }
 
         public int RecoverabilityTimeIncreaseInSeconds { get; set; }
 
