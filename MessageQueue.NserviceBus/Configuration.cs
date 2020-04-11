@@ -150,7 +150,7 @@ namespace MessageQueue.NserviceBus
             var metrics = endpointConfiguration.EnableMetrics();
 
             metrics.SendMetricDataToServiceControl(serviceBusSettings.SendMetricDataToServiceControl,
-               TimeSpan.FromMilliseconds(serviceBusSettings.SendMetricDataToServiceControlIntervalInMilliseconds));
+               TimeSpan.FromMilliseconds(serviceBusSettings.MetricsIntervalInMilliseconds));
 
             return Task.CompletedTask;
         }
