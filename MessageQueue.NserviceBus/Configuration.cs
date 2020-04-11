@@ -125,7 +125,8 @@ namespace MessageQueue.NserviceBus
             return Task.CompletedTask;
         }
 
-        private static Task RetryConfig(this EndpointConfiguration endpointConfiguration, NServiceBusSettings serviceBusSettings)
+        private static Task RetryConfig(this EndpointConfiguration endpointConfiguration,
+            NServiceBusSettings serviceBusSettings)
         {
             var recoverability = endpointConfiguration.Recoverability();
 
@@ -145,7 +146,8 @@ namespace MessageQueue.NserviceBus
             return Task.CompletedTask;
         }
 
-        private static Task MetricsConfig(this EndpointConfiguration endpointConfiguration, NServiceBusSettings serviceBusSettings)
+        private static Task MetricsConfig(this EndpointConfiguration endpointConfiguration, 
+            NServiceBusSettings serviceBusSettings)
         {
             var metrics = endpointConfiguration.EnableMetrics();
 
