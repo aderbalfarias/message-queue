@@ -6,6 +6,7 @@ using NServiceBus;
 using NServiceBus.Logging;
 using System;
 using System.Data.SqlClient;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace MessageQueue.NserviceBus
@@ -63,6 +64,9 @@ namespace MessageQueue.NserviceBus
             
             endpointConfiguration.PersistenceConfig(hostContext, serviceBusSettings, connectionName);
 
+            if (!Directory.Exists(serviceBusSettings.PathToLog))
+                Directory.CreateDirectory(serviceBusSettings.PathToLog);
+            
             var defaultFactory = LogManager.Use<DefaultFactory>();
             defaultFactory.Directory(serviceBusSettings.PathToLog);
 
