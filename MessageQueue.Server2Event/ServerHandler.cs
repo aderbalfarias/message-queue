@@ -4,7 +4,6 @@ using NServiceBus;
 using NServiceBus.Logging;
 using System;
 using System.Threading.Tasks;
-using System.Transactions;
 
 namespace MessageQueue.Server2Event
 {
