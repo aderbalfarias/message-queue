@@ -36,7 +36,7 @@ namespace MessageQueue.ClientCommand
 
                 await _commandService.SendMessageAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogError($"Exception at StartAsync method, Error: {e}");
             }

@@ -61,12 +61,12 @@ namespace MessageQueue.NserviceBus
 
             if (serviceBusSettings.UseMetrics)
                 endpointConfiguration.MetricsConfig(serviceBusSettings);
-            
+
             endpointConfiguration.PersistenceConfig(hostContext, serviceBusSettings, connectionName);
 
             if (!Directory.Exists(serviceBusSettings.PathToLog))
                 Directory.CreateDirectory(serviceBusSettings.PathToLog);
-            
+
             var defaultFactory = LogManager.Use<DefaultFactory>();
             defaultFactory.Directory(serviceBusSettings.PathToLog);
 
@@ -150,7 +150,7 @@ namespace MessageQueue.NserviceBus
             return Task.CompletedTask;
         }
 
-        private static Task MetricsConfig(this EndpointConfiguration endpointConfiguration, 
+        private static Task MetricsConfig(this EndpointConfiguration endpointConfiguration,
             NServiceBusSettings serviceBusSettings)
         {
             var metrics = endpointConfiguration.EnableMetrics();
