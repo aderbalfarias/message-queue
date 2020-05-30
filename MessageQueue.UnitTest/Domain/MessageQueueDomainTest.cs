@@ -18,7 +18,7 @@ namespace MessageQueue.UnitTest.Domain
         #region Fields 
 
         private readonly Mock<IBaseRepository> _mockBaseRepository;
-        private readonly Mock<ILogger<CommandService>> _mockLogger;
+        private readonly Mock<ILogger<EventService>> _mockLogger;
         private readonly Mock<IMessageSession> _mockMessageSession;
         private readonly EventService _eventService;
 
@@ -29,7 +29,7 @@ namespace MessageQueue.UnitTest.Domain
         public MessageQueueDomainTest()
         {
             _mockBaseRepository = new Mock<IBaseRepository>();
-            _mockLogger = new Mock<ILogger<CommandService>>();
+            _mockLogger = new Mock<ILogger<EventService>>();
             _mockMessageSession = new Mock<IMessageSession>();
 
             _eventService = new EventService(_mockBaseRepository.Object,
