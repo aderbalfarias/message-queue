@@ -7,7 +7,6 @@ using NServiceBus.Logging;
 using System;
 using System.Data.SqlClient;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace MessageQueue.NserviceBus
 {
@@ -25,7 +24,7 @@ namespace MessageQueue.NserviceBus
         /// <param name="messageTypeRoute">Message type in case of route to an endpoint</param>
         /// <param name="messageTypePublisher">Message type in case of subscription to an endpoint</param>
         /// <returns></returns>
-        public static Task Register
+        public static void Register
         (
             HostBuilderContext hostContext,
             IServiceCollection services,
@@ -88,11 +87,9 @@ namespace MessageQueue.NserviceBus
             {
                 services.AddSingleton(endpointConfiguration);
             }
-
-            return Task.CompletedTask;
         }
 
-        private static Task TransportConfig(this EndpointConfiguration endpointConfiguration,
+        private static void TransportConfig(this EndpointConfiguration endpointConfiguration,
             HostBuilderContext hostContext, NServiceBusSettings serviceBusSettings,
             string connectionName, Type messageTypeRoute = null, Type messageTypePublisher = null)
         {
@@ -107,11 +104,9 @@ namespace MessageQueue.NserviceBus
             // Previous versions 
             //if (messageTypePublisher != null && !string.IsNullOrEmpty(serviceBusSettings.SubscribeToEndpoint))
             //    transport.Routing().RegisterPublisher(messageTypePublisher, serviceBusSettings.SubscribeToEndpoint);
-
-            return Task.CompletedTask;
         }
 
-        private static Task PersistenceConfig(this EndpointConfiguration endpointConfiguration,
+        private static void PersistenceConfig(this EndpointConfiguration endpointConfiguration,
             HostBuilderContext hostContext, NServiceBusSettings serviceBusSettings, string connectionName)
         {
             var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
@@ -125,11 +120,9 @@ namespace MessageQueue.NserviceBus
 
             var subscriptions = persistence.SubscriptionSettings();
             subscriptions.CacheFor(TimeSpan.FromMinutes(serviceBusSettings.SubscriptionCacheForInMinutes));
-
-            return Task.CompletedTask;
         }
 
-        private static Task RetryConfig(this EndpointConfiguration endpointConfiguration,
+        private static void RetryConfig(this EndpointConfiguration endpointConfiguration,
             NServiceBusSettings serviceBusSettings)
         {
             var recoverability = endpointConfiguration.Recoverability();
@@ -146,19 +139,15 @@ namespace MessageQueue.NserviceBus
                    delayed.NumberOfRetries(serviceBusSettings.NumberOfDelayedRetries);
                    delayed.TimeIncrease(TimeSpan.FromSeconds(serviceBusSettings.RecoverabilityTimeIncreaseInSeconds));
                });
-
-            return Task.CompletedTask;
         }
 
-        private static Task MetricsConfig(this EndpointConfiguration endpointConfiguration,
+        private static void MetricsConfig(this EndpointConfiguration endpointConfiguration,
             NServiceBusSettings serviceBusSettings)
         {
             var metrics = endpointConfiguration.EnableMetrics();
 
             metrics.SendMetricDataToServiceControl(serviceBusSettings.SendMetricDataToServiceControl,
                TimeSpan.FromMilliseconds(serviceBusSettings.MetricsIntervalInMilliseconds));
-
-            return Task.CompletedTask;
         }
     }
 }
