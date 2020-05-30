@@ -11,7 +11,7 @@ namespace MessageQueue.Domain.Services
     public class CommandService : ICommandService
     {
         private readonly IBaseRepository _baseRepository;
-        private readonly ILogger<CommandService> _logger;
+        private readonly ILogger _logger;
         private readonly IMessageSession _messageSession;
 
         public CommandService(IBaseRepository baseRepository,
