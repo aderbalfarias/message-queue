@@ -21,15 +21,15 @@ namespace MessageQueue.IoC
 
         public static IServiceCollection Services(this IServiceCollection services)
         {
-            services.AddScoped<ICommandService, CommandService>();
-            services.AddScoped<IEventService, EventService>();
+            services.AddTransient<ICommandService, CommandService>();
+            services.AddTransient<IEventService, EventService>();
 
             return services;
         }
 
         public static IServiceCollection Repositories(this IServiceCollection services)
         {
-            services.AddScoped<IBaseRepository, BaseRepository>();
+            services.AddTransient<IBaseRepository, BaseRepository>();
 
             return services;
         }
@@ -38,7 +38,8 @@ namespace MessageQueue.IoC
         {
             // Add configuration for DbContext
             // Use connection string from appsettings.json file
-            services.AddDbContext<NserviceBusContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<NserviceBusContext>(options => 
+                options.UseSqlServer(connectionString), ServiceLifetime.Transient, ServiceLifetime.Transient);
 
             return services;
         }
