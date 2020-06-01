@@ -10,7 +10,7 @@ namespace MessageQueue.ClientCommand
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger _logger;
         private readonly ICommandService _commandService;
         private readonly IEndpointInstance _endpointInstance;
 
