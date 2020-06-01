@@ -10,7 +10,7 @@ namespace MessageQueue.ClientEvent
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger _logger;
         private readonly IEventService _eventService;
         private readonly IEndpointInstance _endpointInstance;
 

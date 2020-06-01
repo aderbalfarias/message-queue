@@ -11,7 +11,7 @@ namespace MessageQueue.Server2Event
     {
         private IEndpointInstance _endpointInstance;
 
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger _logger;
         private readonly EndpointConfiguration _endpointConfiguration;
 
         public Worker
