@@ -9,19 +9,17 @@ namespace MessageQueue.Server1Event
 {
     public class Worker : BackgroundService
     {
-        private IEndpointInstance _endpointInstance;
-
         private readonly ILogger _logger;
-        private readonly EndpointConfiguration _endpointConfiguration;
+        private readonly IEndpointInstance _endpointInstance;
 
         public Worker
         (
             ILogger<Worker> logger,
-            EndpointConfiguration endpointConfiguration
+            IEndpointInstance endpointInstance
         )
         {
             _logger = logger;
-            _endpointConfiguration = endpointConfiguration;
+            _endpointInstance = endpointInstance;
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
@@ -31,11 +29,6 @@ namespace MessageQueue.Server1Event
                 _logger.LogInformation("Windows service started");
 
                 await base.StartAsync(cancellationToken);
-
-                _endpointInstance = Endpoint
-                    .Start(_endpointConfiguration)
-                    .GetAwaiter()
-                    .GetResult();
             }
             catch (Exception e)
             {
