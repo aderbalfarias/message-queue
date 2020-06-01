@@ -45,8 +45,8 @@ namespace MessageQueue.NserviceBus
             endpointConfiguration.TransportConfig(hostContext, serviceBusSettings,
                 connectionName, messageTypeRoute, messageTypePublisher);
 
-            endpointConfiguration.AutoSubscribe();
             endpointConfiguration.EnableInstallers();
+            endpointConfiguration.AutoSubscribe();
             endpointConfiguration.UsePersistence<SqlPersistence>();
             endpointConfiguration.UseContainer<ServicesBuilder>(c => c.ExistingServices(services));
             endpointConfiguration.AuditProcessedMessagesTo(serviceBusSettings.AuditProcessedMessagesTo);
@@ -76,17 +76,9 @@ namespace MessageQueue.NserviceBus
                             .Configuration.GetSection(appSection).Get<AppSettings>());
                 });
 
-            if (endpointStart)
-            {
-                var endpointInstance = Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();
-
-                services.AddSingleton(endpointInstance);
-                services.AddSingleton<IMessageSession>(endpointInstance);
-            }
-            else
-            {
-                services.AddSingleton(endpointConfiguration);
-            }
+            var endpointInstance = Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();
+            services.AddSingleton(endpointInstance);
+            services.AddSingleton<IMessageSession>(endpointInstance);
         }
 
         private static void TransportConfig(this EndpointConfiguration endpointConfiguration,

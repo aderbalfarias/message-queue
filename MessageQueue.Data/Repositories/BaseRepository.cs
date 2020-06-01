@@ -13,7 +13,7 @@ namespace MessageQueue.Data.Repositories
     {
         private readonly DbContext _context;
 
-        public BaseRepository(PrimaryContext context)
+        public BaseRepository(NserviceBusContext context)
         {
             _context = context;
         }

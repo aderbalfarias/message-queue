@@ -38,7 +38,7 @@ namespace MessageQueue.IoC
         {
             // Add configuration for DbContext
             // Use connection string from appsettings.json file
-            services.AddDbContext<PrimaryContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<NserviceBusContext>(options => options.UseSqlServer(connectionString));
 
             return services;
         }
