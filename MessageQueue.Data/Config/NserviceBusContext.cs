@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MessageQueue.Data.Config
 {
-    public class PrimaryContext : DbContext
+    public class NserviceBusContext : DbContext
     {
-        public PrimaryContext(DbContextOptions<PrimaryContext> options)
+        public NserviceBusContext(DbContextOptions<NserviceBusContext> options)
             : base(options)
         {
         }
