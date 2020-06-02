@@ -33,8 +33,6 @@ namespace MessageQueue.ClientEvent
                 _logger.LogInformation("Windows service started");
 
                 await base.StartAsync(cancellationToken);
-
-                await _eventService.PublishMessageAsync();
             }
             catch (Exception e)
             {
@@ -63,7 +61,10 @@ namespace MessageQueue.ClientEvent
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation($"Worker running at: {DateTimeOffset.Now}");
-                await Task.Delay(1000, stoppingToken);
+
+                await _eventService.PublishMessageAsync();
+
+                await Task.Delay(10000, stoppingToken);
             }
         }
 

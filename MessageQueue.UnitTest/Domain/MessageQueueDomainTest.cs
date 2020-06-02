@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace MessageQueue.UnitTest.Domain
-{ 
+{
     public class MessageQueueDomainTest
     {
         #region Fields 
