@@ -23,6 +23,7 @@ namespace MessageQueue.Server1Event
             {
                 nsbLog.Info($"Message {message.Id} received at {typeof(ServerHandler).FullName}");
 
+                // Error expected just in order to test
                 var test = Convert.ToInt32(message.Description);
 
                 // Implement logic and log
