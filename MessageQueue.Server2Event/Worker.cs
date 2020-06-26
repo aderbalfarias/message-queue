@@ -54,11 +54,13 @@ namespace MessageQueue.Server2Event
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                _logger.LogInformation($"Worker running at: {DateTimeOffset.Now}");
-                await Task.Delay(1000, stoppingToken);
-            }
+            //while (!stoppingToken.IsCancellationRequested)
+            //{
+            //    _logger.LogInformation($"Worker running at: {DateTimeOffset.Now}");
+            //    await Task.Delay(1000, stoppingToken);
+            //}
+
+            await Task.CompletedTask;
         }
 
         public override void Dispose()
