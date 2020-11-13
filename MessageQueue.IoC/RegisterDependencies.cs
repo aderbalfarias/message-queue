@@ -12,9 +12,9 @@ namespace MessageQueue.IoC
 {
     public static class RegisterDependencies
     {
-        public static IServiceCollection Classes(this IServiceCollection services, IConfigurationSection configurantionSession)
+        public static IServiceCollection Classes(this IServiceCollection services, IConfiguration configurantionSession)
         {
-            services.AddSingleton<AppSettings>(configurantionSession.Get<AppSettings>());
+            //services.AddSingleton<AppSettings>(configurantionSession.GetSection(typeof(AppSettings).Name ));
 
             return services;
         }
